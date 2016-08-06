@@ -6,7 +6,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class txt extends Canvas implements Runnable {
+public class TXT extends Canvas implements Runnable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -19,7 +19,7 @@ public class txt extends Canvas implements Runnable {
 	
 	public boolean running = false;
 	
-	public txt() {
+	public TXT() {
 		setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		setMaximumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -47,28 +47,32 @@ public class txt extends Canvas implements Runnable {
 	}
 	
 	public void run() {
-		long lastTime = System.nanoTime();
-		double nsPerTick = 1000000000D / 60D;
-		
-		int ticks = 0;
-		int frames = 0;
-		
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
 		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
 		
-		while(running = true){
-			long now = System.nanoTime();
-			delta += (now - lastTime) / nsPerTick;
+		while(running){
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
 			lastTime = now;
 			
-			while (delta >= 1){
-				ticks++;
+			if(delta >= 1){
 				tick();
-				delta -= 1;
+				render();
+				ticks++;
+				delta--;
 			}
-			frames++;
-			render();
 			
-			System.out.println(frames + ", " + ticks);
+			if(timer >= 1000000000){
+				System.out.println(ticks + " ticks per second");
+				ticks = 0;
+				timer = 0;
+			}
 		}
 	}
 	
@@ -81,7 +85,7 @@ public class txt extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args){
-		new txt().start();
+		new TXT().start();
 	}
 
 }
