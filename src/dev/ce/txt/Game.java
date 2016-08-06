@@ -4,7 +4,7 @@ public class Game implements Runnable {
 	
 	public boolean running = false;
 	Thread thread;
-	TXT txt;
+	txt txt;
 	int width, height;
 	String title;
 	
@@ -85,7 +85,7 @@ public class Game implements Runnable {
 	
 	public void init() {
 		
-		txt = new TXT(width, height, title);
+		txt = new txt(width, height, title);
 		
 	}
 	
