@@ -91,8 +91,11 @@ public class Game implements Runnable {
 		frame.addKeyListener(keyHandler);
 		entityHandler = new EntityHandler();
 		
+		for(int i = 0; i < 10; i++) {
+			entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
+		}
+		
 		entityHandler.addEntity(new Player(0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
-		entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
 		
 	}
 
@@ -154,7 +157,6 @@ public class Game implements Runnable {
 		
 		if(keyHandler.quit) {
 			stop();
-			System.out.println("quitting");
 		}
 		
 	}
