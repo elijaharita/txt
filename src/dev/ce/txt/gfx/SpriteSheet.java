@@ -13,11 +13,11 @@ public class SpriteSheet {
 	}
 	
 	public BufferedImage getImage(int x, int y) {
-		return spriteSheet.getSubimage(x, y, GlobalVariables.DEFAULTSIZE, GlobalVariables.DEFAULTSIZE);
+		return spriteSheet.getSubimage(x * GlobalVariables.DEFAULTSIZE, y * GlobalVariables.DEFAULTSIZE, GlobalVariables.DEFAULTSIZE, GlobalVariables.DEFAULTSIZE);
 	}
 	
 	public BufferedImage getImage(int x, int y, int width, int height) {
-		return spriteSheet.getSubimage(x, y, width, height);
+		return spriteSheet.getSubimage(x * GlobalVariables.DEFAULTSIZE, y * GlobalVariables.DEFAULTSIZE, width, height);
 	}
 	
 }

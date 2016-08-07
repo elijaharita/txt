@@ -11,6 +11,10 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import dev.ce.txt.assets.GlobalVariables;
+import dev.ce.txt.gfx.ImageHandler;
+import dev.ce.txt.gfx.SpriteSheet;
+
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
@@ -121,6 +125,8 @@ public class Game extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		//test
+		g.drawImage(new SpriteSheet(ImageHandler.loadImage("/textures/spritesheet.png")).getImage(0, 0), 100, 100, GlobalVariables.DEFAULTRENDEREDSIZE, GlobalVariables.DEFAULTRENDEREDSIZE, null);
 		
 		
 		if(showFPS) {
