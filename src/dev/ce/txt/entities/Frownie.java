@@ -3,6 +3,7 @@ package dev.ce.txt.entities;
 import java.awt.Graphics;
 import java.util.Random;
 
+import dev.ce.txt.Game;
 import dev.ce.txt.assets.Assets;
 
 public class Frownie extends Entity {
@@ -25,7 +26,7 @@ public class Frownie extends Entity {
 		Random rand = new Random();
 		int randInt = rand.nextInt(100);
 		
-		if(randInt >= 95) {
+		if(randInt >= 97) {
 			
 			changeCourse();
 			
@@ -45,6 +46,22 @@ public class Frownie extends Entity {
 		
 		if(direction[3] == true) {
 			y -= speed;
+		}
+		
+		if(x - Assets.DEFAULTRENDEREDSIZE> Game.WIDTH) {
+			x = Game.WIDTH - Assets.DEFAULTRENDEREDSIZE;
+		}
+		
+		if(x < 0) {
+			x = 0;
+		}
+		
+		if(y - Assets.DEFAULTRENDEREDSIZE> Game.HEIGHT) {
+			y = Game.HEIGHT - Assets.DEFAULTRENDEREDSIZE;
+		}
+		
+		if(y < 0) {
+			y = 0;
 		}
 		
 	}

@@ -19,11 +19,12 @@ import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
 
+	public static final String NAME = "txt";
+
 	public static final int SCALE = 3;
 	public static final int WIDTH = 420 * SCALE;
 	public static final int HEIGHT = WIDTH / 16 * 9;
-	public static final String NAME = "txt";
-
+	
 	private JFrame frame;
 	private Canvas canvas;
 	private EntityHandler entityHandler;
@@ -51,17 +52,16 @@ public class Game implements Runnable {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
+		frame.setSize(WIDTH, HEIGHT);
 
 		frame.add(canvas, BorderLayout.CENTER);
-		frame.pack();
 
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		frame.pack();
 		frame.setVisible(true);
 		frame.setFocusable(true);
 		frame.requestFocus();
-		
-		frame.setAlwaysOnTop(true);
 
 	}
 
@@ -144,7 +144,7 @@ public class Game implements Runnable {
 		tickCount++;
 
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = i + tickCount;
+			pixels[i] = i / 7 + tickCount;
 		}
 		
 		keyHandler.tick();
@@ -160,10 +160,9 @@ public class Game implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		//test
-		
-		g.drawImage(Assets.grass, 0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		entityHandler.render(g);
 		
 		if(showFPS) {

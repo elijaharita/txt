@@ -20,10 +20,10 @@ public class KeyHandler implements KeyListener {
 	
 	public void tick() {
 		
-		up = keys[87];
-		down = keys[83];
-		left = keys[65];
-		right = keys[68];
+		up = keys[KeyEvent.VK_W];
+		down = keys[KeyEvent.VK_S];
+		left = keys[KeyEvent.VK_A];
+		right = keys[KeyEvent.VK_D];
 		
 	}
 	
