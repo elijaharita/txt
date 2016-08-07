@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-	public boolean up, down, left, right, quit;
+	public boolean up, down, left, right;
 	
 	private boolean keys[];
 	
@@ -21,7 +21,6 @@ public class KeyHandler implements KeyListener {
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
-		quit = keys[KeyEvent.VK_Q];
 		
 	}
 	

@@ -155,10 +155,6 @@ public class Game implements Runnable {
 		keyHandler.tick();
 		entityHandler.tick();
 		
-		if(keyHandler.quit) {
-			stop();
-		}
-		
 	}
 
 	public void render() {
