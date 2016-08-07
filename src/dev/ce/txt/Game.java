@@ -18,8 +18,6 @@ import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
 
-	private static final long serialVersionUID = 1L;
-
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = WIDTH / 12 * 9;
 	public static final int SCALE = 3;
@@ -47,6 +45,7 @@ public class Game implements Runnable {
 		canvas.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		canvas.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		canvas.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		canvas.setFocusable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
@@ -57,6 +56,8 @@ public class Game implements Runnable {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		frame.setFocusable(true);
+		frame.requestFocus();
 		
 		frame.setAlwaysOnTop(true);
 
