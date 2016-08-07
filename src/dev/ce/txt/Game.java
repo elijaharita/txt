@@ -11,9 +11,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import dev.ce.txt.assets.GlobalVariables;
-import dev.ce.txt.gfx.ImageHandler;
-import dev.ce.txt.gfx.SpriteSheet;
+import dev.ce.txt.assets.Assets;
 import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
@@ -81,6 +79,8 @@ public class Game implements Runnable {
 	}
 	
 	public void init() {
+		
+		Assets.init();
 		
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
@@ -150,8 +150,7 @@ public class Game implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		//test
-		g.drawImage(new SpriteSheet(ImageHandler.loadImage("/textures/spritesheet.png")).getImage(0, 0), 100, 100, GlobalVariables.DEFAULTRENDEREDSIZE, GlobalVariables.DEFAULTRENDEREDSIZE, null);
-		
+		g.drawImage(Assets.grass, 0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
 		
 		if(showFPS) {
 			int x = 10;

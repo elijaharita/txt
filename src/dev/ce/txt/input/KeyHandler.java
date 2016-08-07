@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-	boolean keys[];
+	private boolean keys[];
 	
 	public KeyHandler() {
 		keys = new boolean[256];
