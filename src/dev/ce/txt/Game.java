@@ -19,8 +19,8 @@ import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
 
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = WIDTH / 12 * 9;
+	public static final int WIDTH = 420;
+	public static final int HEIGHT = WIDTH / 16 * 9;
 	public static final int SCALE = 3;
 	public static final String NAME = "txt";
 
