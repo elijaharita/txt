@@ -1,100 +1,128 @@
 package dev.ce.txt;
 
-public class Game implements Runnable {
-	
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
+import javax.swing.JFrame;
+
+public class Game extends Canvas implements Runnable {
+
+	private static final long serialVersionUID = 1L;
+
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = WIDTH / 12 * 9;
+	public static final int SCALE = 3;
+	public static final String NAME = "txt";
+
+	private JFrame frame;
+
 	public boolean running = false;
-	Thread thread;
-	txt txt;
-	int width, height;
-	String title;
-	
-	public Game(int width, int height, String title) {
+	public int tickCount = 0;
+
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+	public Game() {
+		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+
+		frame = new JFrame(NAME);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+
+		frame.add(this, BorderLayout.CENTER);
+		frame.pack();
+
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 		
-		this.width = width;
-		this.height = height;
-		this.title = title;
-		
-		start();
-		
+		frame.setAlwaysOnTop(true);
+
 	}
-	
+
 	public synchronized void start() {
-		
-		if(running) {
-			return;
-		}
-		
 		running = true;
-		thread = new Thread(this);
-		thread.start();
-		
+		new Thread(this).start();
 	}
 
 	public synchronized void stop() {
-		
-		try {
-			thread.join();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
 		running = false;
+
 	}
-	
+
 	public void run() {
-		
-		init();
-		
-		int fps = 60;
-		double tpt = 1000000000 / fps;
-		double delta = 0;
-		long now;
 		long lastTime = System.nanoTime();
-		long timer = 0;
+		double nsPerTick = 1000000000D / 60D;
+
 		int ticks = 0;
-		
-		while (running) {
-			
-			now = System.nanoTime();
-			delta += (now - lastTime) / tpt;
-			timer += now - lastTime;
+		int frames = 0;
+
+		long lastTimer = System.currentTimeMillis();
+		double delta = 0;
+
+		while (running = true) {
+			long now = System.nanoTime();
+			delta += (now - lastTime) / nsPerTick;
 			lastTime = now;
-			
-			if(delta >= 1) {
-				
-				tick();
-				render();
+			boolean shouldRender = false;
+			while (delta >= 1) {
 				ticks++;
-				delta--;
-				
+				tick();
+				delta -= 1;
+				shouldRender = true;
 			}
-			
-			if(timer >= 1000000000) {
-				
-				System.out.println(ticks + " ticks per second");
+			try {
+				Thread.sleep(2);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (shouldRender) {
+				frames++;
+				render();
+			}
+
+			if (System.currentTimeMillis() - lastTimer >= 1000) {
+				lastTimer += 1000;
+				System.out.println(frames + " FPS, " + ticks + " TPS");
+				frames = 0;
 				ticks = 0;
-				timer = 0;
-				
 			}
-			
 		}
-		
-		stop();
-		
+
 	}
-	
-	public void init() {
-		
-		txt = new txt(width, height, title);
-		
-	}
-	
+
 	public void tick() {
-		
+		tickCount++;
+
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = i + tickCount;
+		}
 	}
-	
+
 	public void render() {
-		
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+
+		g.dispose();
+		bs.show();
 	}
-	
+
+	public static void main(String[] args) {
+		new Game().start();
+	}
+
 }
