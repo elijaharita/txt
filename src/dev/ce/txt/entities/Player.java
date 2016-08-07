@@ -8,7 +8,7 @@ import dev.ce.txt.input.KeyHandler;
 
 public class Player extends Entity {
 	
-	public int speed = 5;
+	public int speed = 4;
 	
 	private BufferedImage texture;
 	private KeyHandler keyHandler;
@@ -43,7 +43,7 @@ public class Player extends Entity {
 		}
 		
 	}
-
+	
 	@Override
 	public void render(Graphics g) {
 		

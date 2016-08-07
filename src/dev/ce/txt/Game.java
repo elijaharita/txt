@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.entities.EntityHandler;
+import dev.ce.txt.entities.Frownie;
 import dev.ce.txt.entities.Player;
 import dev.ce.txt.input.KeyHandler;
 
@@ -90,6 +91,7 @@ public class Game implements Runnable {
 		entityHandler = new EntityHandler();
 		
 		entityHandler.addEntity(new Player(0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
+		entityHandler.addEntity(new Frownie(100, 100, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
 		
 	}
 

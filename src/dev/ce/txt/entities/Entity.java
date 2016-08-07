@@ -1,13 +1,18 @@
 package dev.ce.txt.entities;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import dev.ce.txt.assets.Assets;
 
 public abstract class Entity {
 
-	int x;
-	int y;
-	int width;
-	int height;
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
+	
+	protected BufferedImage texture;
 	
 	public Entity(int x, int y, int width, int height) {
 		
@@ -20,6 +25,10 @@ public abstract class Entity {
 	
 	public abstract void tick();
 	
-	public abstract void render(Graphics g);
+	public void render(Graphics g) {
+		
+		g.drawImage(texture, x, y, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
+		
+	}
 	
 }
