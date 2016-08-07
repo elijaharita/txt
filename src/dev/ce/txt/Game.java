@@ -124,9 +124,11 @@ public class Game extends Canvas implements Runnable {
 		
 		
 		if(showFPS) {
+			int x = 10;
+			int y = 5;
 			g.setColor(Color.YELLOW);
-			g.drawString("FPS: " + frames, 10, 20);
-			g.drawString("TPS: " + ticks, 10, 40);
+			g.drawString("FPS: " + frames, x, y + g.getFontMetrics().getHeight());
+			g.drawString("TPS: " + ticks, x, y + g.getFontMetrics().getHeight() * 2);
 		}
 
 		g.dispose();
