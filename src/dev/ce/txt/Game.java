@@ -71,14 +71,15 @@ public class Game implements Runnable {
 		thread.start();
 	}
 
-	public synchronized void stop() {
+	public void stop() {
+		
+		running = false;
 		
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		running = false;
 
 	}
 	
@@ -141,6 +142,7 @@ public class Game implements Runnable {
 	}
 
 	public void tick() {
+		
 		tickCount++;
 
 		for (int i = 0; i < pixels.length; i++) {
@@ -149,6 +151,11 @@ public class Game implements Runnable {
 		
 		keyHandler.tick();
 		entityHandler.tick();
+		
+		if(keyHandler.quit) {
+			stop();
+			System.out.println("quitting");
+		}
 		
 	}
 
@@ -168,9 +175,8 @@ public class Game implements Runnable {
 		if(showFPS) {
 			int x = 10;
 			int y = 5;
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.WHITE);
 			g.drawString("FPS: " + frames, x, y + g.getFontMetrics().getHeight());
-			g.drawString("TPS: " + ticks, x, y + g.getFontMetrics().getHeight() * 2);
 		}
 
 		g.dispose();

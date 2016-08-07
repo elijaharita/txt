@@ -48,7 +48,7 @@ public class Frownie extends Entity {
 			y -= speed;
 		}
 		
-		if(x - Assets.DEFAULTRENDEREDSIZE> Game.WIDTH) {
+		if(x + Assets.DEFAULTRENDEREDSIZE > Game.WIDTH) {
 			x = Game.WIDTH - Assets.DEFAULTRENDEREDSIZE;
 		}
 		
@@ -56,7 +56,7 @@ public class Frownie extends Entity {
 			x = 0;
 		}
 		
-		if(y - Assets.DEFAULTRENDEREDSIZE> Game.HEIGHT) {
+		if(y + Assets.DEFAULTRENDEREDSIZE > Game.HEIGHT) {
 			y = Game.HEIGHT - Assets.DEFAULTRENDEREDSIZE;
 		}
 		

@@ -3,6 +3,7 @@ package dev.ce.txt.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dev.ce.txt.Game;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.input.KeyHandler;
 
@@ -39,6 +40,22 @@ public class Player extends Entity {
 		
 		if(keyHandler.right) {
 			x += speed;	
+		}
+		
+		if(x + Assets.DEFAULTRENDEREDSIZE > Game.WIDTH) {
+			x = Game.WIDTH - Assets.DEFAULTRENDEREDSIZE;
+		}
+		
+		if(x < 0) {
+			x = 0;
+		}
+		
+		if(y + Assets.DEFAULTRENDEREDSIZE > Game.HEIGHT) {
+			y = Game.HEIGHT - Assets.DEFAULTRENDEREDSIZE;
+		}
+		
+		if(y < 0) {
+			y = 0;
 		}
 		
 	}
