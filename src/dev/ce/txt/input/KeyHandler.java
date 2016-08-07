@@ -36,7 +36,6 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		
 		keys[e.getKeyCode()] = true;
-		System.out.println(e.getKeyCode() + " Is true!");
 		
 	}
 

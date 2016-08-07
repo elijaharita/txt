@@ -19,9 +19,9 @@ import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
 
-	public static final int WIDTH = 420;
-	public static final int HEIGHT = WIDTH / 16 * 9;
 	public static final int SCALE = 3;
+	public static final int WIDTH = 420 * SCALE;
+	public static final int HEIGHT = WIDTH / 16 * 9;
 	public static final String NAME = "txt";
 
 	private JFrame frame;
@@ -44,9 +44,9 @@ public class Game implements Runnable {
 		frame = new JFrame(NAME);
 		canvas = new Canvas();
 		
-		canvas.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		canvas.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		canvas.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+		canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
+		canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		canvas.setFocusable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +91,7 @@ public class Game implements Runnable {
 		entityHandler = new EntityHandler();
 		
 		entityHandler.addEntity(new Player(0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
-		entityHandler.addEntity(new Frownie(100, 100, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
+		entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
 		
 	}
 

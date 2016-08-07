@@ -31,8 +31,6 @@ public class Frownie extends Entity {
 			
 		}
 		
-		System.out.println(direction[0]);
-		
 		if(direction[0] == true) {
 			x -= speed;
 		}
@@ -61,8 +59,6 @@ public class Frownie extends Entity {
 	public void changeCourse() {
 		
 		Random rand = new Random();
-		
-		System.out.println("called");
 		
 		for(int i = 0; i < 4; i++) {
 			

@@ -19,7 +19,6 @@ public class Player extends Entity {
 		this.keyHandler = keyHandler;
 		
 		texture = Assets.player;
-		System.out.println("init");
 		
 	}
 
