@@ -2,6 +2,7 @@ package dev.ce.txt;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -26,6 +27,9 @@ public class Game extends Canvas implements Runnable {
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+	private int frames;
+	private int ticks;
+	private boolean showFPS = true;
 
 	public Game() {
 		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -91,7 +95,8 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
 				lastTimer += 1000;
-				System.out.println(frames + " FPS, " + ticks + " TPS");
+				this.ticks = ticks;
+				this.frames = frames;
 				frames = 0;
 				ticks = 0;
 			}
@@ -116,6 +121,13 @@ public class Game extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		
+		
+		if(showFPS) {
+			g.setColor(Color.YELLOW);
+			g.drawString("FPS: " + frames, 10, 20);
+			g.drawString("TPS: " + ticks, 10, 40);
+		}
 
 		g.dispose();
 		bs.show();
