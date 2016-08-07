@@ -14,8 +14,9 @@ import javax.swing.JFrame;
 import dev.ce.txt.assets.GlobalVariables;
 import dev.ce.txt.gfx.ImageHandler;
 import dev.ce.txt.gfx.SpriteSheet;
+import dev.ce.txt.input.KeyHandler;
 
-public class Game extends Canvas implements Runnable {
+public class Game implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,27 +26,32 @@ public class Game extends Canvas implements Runnable {
 	public static final String NAME = "txt";
 
 	private JFrame frame;
+	private Canvas canvas;
 
 	public boolean running = false;
 	public int tickCount = 0;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private KeyHandler keyHandler;
+	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private int frames;
 	private int ticks;
 	private boolean showFPS = true;
 
 	public Game() {
-		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 
 		frame = new JFrame(NAME);
+		canvas = new Canvas();
+		
+		canvas.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		canvas.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		canvas.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 
-		frame.add(this, BorderLayout.CENTER);
+		frame.add(canvas, BorderLayout.CENTER);
 		frame.pack();
 
 		frame.setResizable(false);
@@ -58,15 +64,32 @@ public class Game extends Canvas implements Runnable {
 
 	public synchronized void start() {
 		running = true;
-		new Thread(this).start();
+		thread = new Thread(this);
+		thread.start();
 	}
 
 	public synchronized void stop() {
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		running = false;
 
 	}
+	
+	public void init() {
+		
+		keyHandler = new KeyHandler();
+		frame.addKeyListener(keyHandler);
+		
+	}
 
 	public void run() {
+		
+		init();
+		
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D / 60D;
 
@@ -117,14 +140,14 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void render() {
-		BufferStrategy bs = getBufferStrategy();
+		BufferStrategy bs = canvas.getBufferStrategy();
 		if (bs == null) {
-			createBufferStrategy(3);
+			canvas.createBufferStrategy(3);
 			return;
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		//test
 		g.drawImage(new SpriteSheet(ImageHandler.loadImage("/textures/spritesheet.png")).getImage(0, 0), 100, 100, GlobalVariables.DEFAULTRENDEREDSIZE, GlobalVariables.DEFAULTRENDEREDSIZE, null);
 		
