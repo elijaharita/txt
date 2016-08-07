@@ -12,6 +12,8 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import dev.ce.txt.assets.Assets;
+import dev.ce.txt.entities.EntityHandler;
+import dev.ce.txt.entities.Player;
 import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
@@ -23,12 +25,13 @@ public class Game implements Runnable {
 
 	private JFrame frame;
 	private Canvas canvas;
+	private EntityHandler entityHandler;
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private KeyHandler keyHandler;
 
 	public boolean running = false;
 	public int tickCount = 0;
-
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private KeyHandler keyHandler;
+	
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private int frames;
@@ -84,6 +87,9 @@ public class Game implements Runnable {
 		
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
+		entityHandler = new EntityHandler();
+		
+		entityHandler.addEntity(new Player(0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
 		
 	}
 
@@ -138,6 +144,10 @@ public class Game implements Runnable {
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = i + tickCount;
 		}
+		
+		keyHandler.tick();
+		entityHandler.tick();
+		
 	}
 
 	public void render() {
@@ -150,7 +160,9 @@ public class Game implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		//test
+		
 		g.drawImage(Assets.grass, 0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
+		entityHandler.render(g);
 		
 		if(showFPS) {
 			int x = 10;
