@@ -20,4 +20,5 @@ public class SpriteSheet {
 		return spriteSheet.getSubimage(x * Assets.DEFAULTSIZE, y * Assets.DEFAULTSIZE, width, height);
 	}
 	
+	
 }
