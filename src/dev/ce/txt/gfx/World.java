@@ -7,41 +7,30 @@ import dev.ce.txt.Conveyor;
 import dev.ce.txt.Util;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.entities.EntityHandler;
+import dev.ce.txt.entities.Player;
 import dev.ce.txt.gfx.blocks.Block;
 
 public class World {
 
 	private int blocks[][];
-<<<<<<< HEAD
 	
 	public Conveyor conveyor;
-	
-=======
 
 	public static final int MAP_WIDTH = 100;
 	public static final int MAP_WIDTH_MASK = MAP_WIDTH - 1;
 
->>>>>>> origin/master
 	public int xOffset = 0;
 	public int yOffset = 0;
 	public int width;
 	public int height;
 	public int spawnX;
 	public int spawnY;
-<<<<<<< HEAD
 	
 	private EntityHandler entityHandler;
-	
+		
 	public World(String worldPath, Conveyor conveyor) {
-		
 		this.conveyor = conveyor;
-		
-=======
-
-	public World(String worldPath) {
->>>>>>> origin/master
 		loadWorld(worldPath);
-		entityHandler = new EntityHandler();
 	}
 
 	public void tick() {
@@ -59,6 +48,7 @@ public class World {
 				}
 			}
 		}
+		entityHandler.tick();
 	}
 
 	public void render(Graphics g) {
@@ -67,6 +57,7 @@ public class World {
 				getBlock(x, y).render(g, x * Assets.DEFAULTRENDEREDSIZE, y * Assets.DEFAULTRENDEREDSIZE);
 			}
 		}
+		entityHandler.render(g);
 	}
 
 	public Block getBlock(int x, int y) {
@@ -105,13 +96,10 @@ public class World {
 			}
 
 		}
-<<<<<<< HEAD
 		
-		//entityHandler.addEntity(new Player(spawnX * Assets.DEFAULTRENDEREDSIZE, spawnY * Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, ));
+		entityHandler = new EntityHandler();
+		entityHandler.addEntity(new Player(spawnX * Assets.DEFAULTRENDEREDSIZE, spawnY * Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, conveyor));
 		
-=======
-
->>>>>>> origin/master
 	}
 
 }

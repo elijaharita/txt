@@ -3,6 +3,7 @@ package dev.ce.txt.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dev.ce.txt.Conveyor;
 import dev.ce.txt.Game;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.input.KeyHandler;
@@ -12,12 +13,14 @@ public class Player extends Entity {
 	public int speed = 4;
 	
 	private BufferedImage texture;
+	private Conveyor conveyor;
 	private KeyHandler keyHandler;
 	
-	public Player(int x, int y, int width, int height, KeyHandler keyHandler) {
+	public Player(int x, int y, int width, int height, Conveyor conveyor) {
 		
 		super(x, y, width, height);
-		this.keyHandler = keyHandler;
+		this.conveyor = conveyor;
+		this.keyHandler = conveyor.getKeyHandler();
 		
 		texture = Assets.player;
 		
