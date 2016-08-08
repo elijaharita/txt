@@ -39,7 +39,7 @@ public class World {
 				Random r = new Random();
 				chance = r.nextInt(15000);
 				if (chance == 1) {
-					if (getBlock(x + 1, y) == Block.grass || getBlock(x + 1, y) == Block.grass || getBlock(x - 1, y) == Block.grass || getBlock(x, y-1) == Block.grass) {
+					if (getBlock(x + 1, y) == Block.grass || getBlock(x + 1, y) == Block.grass || getBlock(x - 1, y) == Block.grass || getBlock(x, y - 1) == Block.grass) {
 						if (getBlock(x, y) == Block.dirt) {
 							blocks[x][y] = 0;
 						}
@@ -111,6 +111,14 @@ public class World {
 	
 	public Camera getCamera() {
 		return camera;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 
 }
