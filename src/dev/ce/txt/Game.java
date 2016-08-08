@@ -89,8 +89,17 @@ public class Game implements Runnable {
 		
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
+<<<<<<< HEAD
 		
 		world = new World("resources/worlds/world1.lvl", conveyor);
+=======
+		entityHandler = new EntityHandler();
+		
+		world = new World("resources/worlds/world1.lvl");
+		
+		entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
+		entityHandler.addEntity(new Player(WIDTH  / 2 - Assets.DEFAULTRENDEREDSIZE  / 2, HEIGHT  / 2 - Assets.DEFAULTRENDEREDSIZE  / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
+>>>>>>> origin/master
 		
 	}
 
@@ -143,6 +152,10 @@ public class Game implements Runnable {
 		
 		keyHandler.tick();
 		world.tick();
+<<<<<<< HEAD
+=======
+		entityHandler.tick();
+>>>>>>> origin/master
 		
 	}
 
