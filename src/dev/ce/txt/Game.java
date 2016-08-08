@@ -12,9 +12,6 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import dev.ce.txt.assets.Assets;
-import dev.ce.txt.entities.EntityHandler;
-import dev.ce.txt.entities.Frownie;
-import dev.ce.txt.entities.Player;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
 
@@ -28,13 +25,13 @@ public class Game implements Runnable {
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private EntityHandler entityHandler;
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private KeyHandler keyHandler;
 	private World world;
 
 	public boolean running = false;
 	public int tickCount = 0;
+	public Conveyor conveyor;
 	
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -86,19 +83,14 @@ public class Game implements Runnable {
 	
 	public void init() {
 		
+		conveyor = new Conveyor(this);
+		
 		Assets.init();
 		
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
-		entityHandler = new EntityHandler();
 		
-		world = new World("resources/worlds/world1.lvl");
-		
-		for(int i = 0; i < 10; i++) {
-			entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
-		}
-		
-		entityHandler.addEntity(new Player(0, 0, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
+		world = new World("resources/worlds/world1.lvl", conveyor);
 		
 	}
 
@@ -150,8 +142,7 @@ public class Game implements Runnable {
 		}
 		
 		keyHandler.tick();
-		//world.tick();
-		entityHandler.tick();
+		world.tick();
 		
 	}
 
@@ -167,7 +158,6 @@ public class Game implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		world.render(g);
-		entityHandler.render(g);
 		
 		if(showFPS) {
 			int x = 10;
@@ -182,6 +172,10 @@ public class Game implements Runnable {
 
 	public static void main(String[] args) {
 		new Game().start();
+	}
+	
+	public World getWorld() {
+		return world;
 	}
 
 }
