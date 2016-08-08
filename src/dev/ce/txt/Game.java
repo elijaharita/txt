@@ -15,6 +15,7 @@ import dev.ce.txt.assets.Assets;
 import dev.ce.txt.entities.EntityHandler;
 import dev.ce.txt.entities.Frownie;
 import dev.ce.txt.entities.Player;
+import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
 
 public class Game implements Runnable {
@@ -30,6 +31,7 @@ public class Game implements Runnable {
 	private EntityHandler entityHandler;
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private KeyHandler keyHandler;
+	private World world;
 
 	public boolean running = false;
 	public int tickCount = 0;
@@ -37,7 +39,6 @@ public class Game implements Runnable {
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private int frames;
-	private int ticks;
 	private boolean showFPS = true;
 
 	public Game() {
@@ -91,6 +92,8 @@ public class Game implements Runnable {
 		frame.addKeyListener(keyHandler);
 		entityHandler = new EntityHandler();
 		
+		world = new World("resources/worlds/world1.lvl");
+		
 		for(int i = 0; i < 10; i++) {
 			entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
 		}
@@ -106,7 +109,6 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D / 60D;
 
-		int ticks = 0;
 		int frames = 0;
 
 		long lastTimer = System.currentTimeMillis();
@@ -116,35 +118,30 @@ public class Game implements Runnable {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / nsPerTick;
 			lastTime = now;
-			boolean shouldRender = false;
 			while (delta >= 1) {
-				ticks++;
+				frames++;
 				tick();
+				render();
 				delta -= 1;
-				shouldRender = true;
 			}
 			try {
 				Thread.sleep(2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if (shouldRender) {
-				frames++;
-				render();
-			}
 
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
 				lastTimer += 1000;
-				this.ticks = ticks;
 				this.frames = frames;
 				frames = 0;
-				ticks = 0;
 			}
 		}
 
 	}
 
 	public void tick() {
+		
+		showFPS = keyHandler.stats;
 		
 		tickCount++;
 
@@ -153,6 +150,7 @@ public class Game implements Runnable {
 		}
 		
 		keyHandler.tick();
+		//world.tick();
 		entityHandler.tick();
 		
 	}
@@ -168,6 +166,7 @@ public class Game implements Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		world.render(g);
 		entityHandler.render(g);
 		
 		if(showFPS) {

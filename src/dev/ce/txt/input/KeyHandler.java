@@ -5,13 +5,13 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-	public boolean up, down, left, right;
+	public boolean up, down, left, right, stats;
 	
 	private boolean keys[];
 	
 	public KeyHandler() {
 		
-		keys = new boolean[256];
+		keys = new boolean[1024];
 		
 	}
 	
@@ -21,6 +21,7 @@ public class KeyHandler implements KeyListener {
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
+		stats = keys[192];
 		
 	}
 	
@@ -33,6 +34,8 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		
 		keys[e.getKeyCode()] = true;
+		
+		//System.out.println(e.getKeyCode());
 		
 	}
 
