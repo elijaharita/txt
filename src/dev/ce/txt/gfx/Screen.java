@@ -1,6 +1,6 @@
 package dev.ce.txt.gfx;
 
-import dev.ce.txt.assets.GlobalVariables;
+import dev.ce.txt.assets.Assets;
 
 public class Screen {
 	
@@ -43,7 +43,7 @@ public class Screen {
 				int tileIndex = (xTile &(MAP_WIDTH_MASK)) + (yTile & (MAP_WIDTH_MASK)) * MAP_WIDTH;
 				
 				for (int y = yMin; y < yMax; y++){
-					int sheetPixel = ((y+yOffset) & 7) * GlobalVariables.DEFAULTRENDEREDSIZE + ((xMin + xOffset) & 7);
+					int sheetPixel = ((y+yOffset) & 7) * Assets.DEFAULTRENDEREDSIZE + ((xMin + xOffset) & 7);
 					int tilePixel = offset + xMin + y * row;
 					for (int x = xMin; x < xMax; x++){
 						
