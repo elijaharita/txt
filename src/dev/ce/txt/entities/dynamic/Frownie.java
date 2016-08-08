@@ -1,19 +1,19 @@
-package dev.ce.txt.entities;
+package dev.ce.txt.entities.dynamic;
 
 import java.awt.Graphics;
 import java.util.Random;
 
-import dev.ce.txt.Game;
+import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
 
-public class Frownie extends Entity {
+public class Frownie extends DynamicEntity {
 
 	private int speed = 3;
 	private boolean direction[];
 	
-	public Frownie(int x, int y, int width, int height) {
+	public Frownie(int x, int y, int width, int height, Conveyor conveyor) {
 		
-		super(x, y, width, height);
+		super(x, y, width, height, conveyor);
 		
 		direction = new boolean[4];
 		texture = Assets.frownie;
@@ -48,29 +48,6 @@ public class Frownie extends Entity {
 			y -= speed;
 		}
 		
-		if(x + Assets.DEFAULTRENDEREDSIZE > Game.WIDTH) {
-			x = Game.WIDTH - Assets.DEFAULTRENDEREDSIZE;
-		}
-		
-		if(x < 0) {
-			x = 0;
-		}
-		
-		if(y + Assets.DEFAULTRENDEREDSIZE > Game.HEIGHT) {
-			y = Game.HEIGHT - Assets.DEFAULTRENDEREDSIZE;
-		}
-		
-		if(y < 0) {
-			y = 0;
-		}
-		
-	}
-
-	@Override
-	public void render(Graphics g) {
-		
-		g.drawImage(texture, x, y, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
-		
 	}
 	
 	public void changeCourse() {
@@ -88,6 +65,13 @@ public class Frownie extends Entity {
 			}
 			
 		}
+		
+	}
+
+	@Override
+	public void render(Graphics g) {
+		
+		g.drawImage(texture, x, y, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
 		
 	}
 	

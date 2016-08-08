@@ -19,13 +19,13 @@ public class Game implements Runnable {
 
 	public static final String NAME = "txt";
 
-	public static final int SCALE = 3;
-	public static final int WIDTH = 420 * SCALE;
-	public static final int HEIGHT = WIDTH / 16 * 9;
+	public int scale = 3;
+	public int width = 420 * scale;
+	public int height = width / 16 * 9;
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private KeyHandler keyHandler;
 	private World world;
 
@@ -43,14 +43,14 @@ public class Game implements Runnable {
 		frame = new JFrame(NAME);
 		canvas = new Canvas();
 		
-		canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-		canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
-		canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(WIDTH, HEIGHT);
+		frame.setSize(width, height);
 
 		frame.add(canvas, BorderLayout.CENTER);
 
@@ -157,7 +157,7 @@ public class Game implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.fillRect(0, 0, width, height);
 		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		world.render(g);
 		
@@ -182,6 +182,14 @@ public class Game implements Runnable {
 
 	public KeyHandler getKeyHandler() {
 		return keyHandler;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public int getWidth() {
+		return width;
 	}
 
 }

@@ -7,7 +7,7 @@ import dev.ce.txt.Conveyor;
 import dev.ce.txt.Util;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.entities.EntityHandler;
-import dev.ce.txt.entities.Player;
+import dev.ce.txt.entities.dynamic.Player;
 import dev.ce.txt.gfx.blocks.Block;
 
 public class World {
@@ -15,12 +15,10 @@ public class World {
 	private int blocks[][];
 	
 	public Conveyor conveyor;
+	public Camera camera;
 
-	public static final int MAP_WIDTH = 100;
-	public static final int MAP_WIDTH_MASK = MAP_WIDTH - 1;
-
-	public int xOffset = 0;
-	public int yOffset = 0;
+	public int xOffset;
+	public int yOffset;
 	public int width;
 	public int height;
 	public int spawnX;
@@ -30,6 +28,7 @@ public class World {
 		
 	public World(String worldPath, Conveyor conveyor) {
 		this.conveyor = conveyor;
+		camera = new Camera(conveyor);
 		loadWorld(worldPath);
 	}
 
@@ -54,7 +53,7 @@ public class World {
 	public void render(Graphics g) {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				getBlock(x, y).render(g, x * Assets.DEFAULTRENDEREDSIZE, y * Assets.DEFAULTRENDEREDSIZE);
+				getBlock(x, y).render(g, x * Assets.DEFAULTRENDEREDSIZE - conveyor.getCamera().getXOffset(), y * Assets.DEFAULTRENDEREDSIZE - conveyor.getCamera().getYOffset());
 			}
 		}
 		entityHandler.render(g);
@@ -82,8 +81,8 @@ public class World {
 		String[] tokens = worldString.split("\\s+");
 		width = Util.parseInt(tokens[0]);
 		height = Util.parseInt(tokens[1]);
-		spawnX = Util.parseInt(tokens[2]);
-		spawnY = Util.parseInt(tokens[3]);
+		spawnX = Util.parseInt(tokens[2]) - 1;
+		spawnY = Util.parseInt(tokens[3]) - 1;
 
 		blocks = new int[width][height];
 
@@ -100,6 +99,18 @@ public class World {
 		entityHandler = new EntityHandler();
 		entityHandler.addEntity(new Player(spawnX * Assets.DEFAULTRENDEREDSIZE, spawnY * Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, conveyor));
 		
+	}
+	
+	public int getXOffset() {
+		return xOffset;
+	}
+	
+	public int getYOffset() {
+		return yOffset;
+	}
+	
+	public Camera getCamera() {
+		return camera;
 	}
 
 }
