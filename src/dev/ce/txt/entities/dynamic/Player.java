@@ -57,7 +57,6 @@ public class Player extends DynamicEntity {
 
 	@Override
 	public void render(Graphics g) {
-		System.out.println(x);
 
 		g.drawImage(texture, x - conveyor.getCamera().getXOffset(), y - conveyor.getCamera().getYOffset(), Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
 
