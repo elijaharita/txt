@@ -12,9 +12,6 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import dev.ce.txt.assets.Assets;
-import dev.ce.txt.entities.EntityHandler;
-import dev.ce.txt.entities.Frownie;
-import dev.ce.txt.entities.Player;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
 
@@ -22,19 +19,19 @@ public class Game implements Runnable {
 
 	public static final String NAME = "txt";
 
-	public static final int SCALE = 3;
-	public static final int WIDTH = 420 * SCALE;
-	public static final int HEIGHT = WIDTH / 16 * 9;
+	public int scale = 3;
+	public int width = 420 * scale;
+	public int height = width / 16 * 9;
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private EntityHandler entityHandler;
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private KeyHandler keyHandler;
 	private World world;
 
 	public boolean running = false;
 	public int tickCount = 0;
+	public Conveyor conveyor;
 	
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -46,14 +43,14 @@ public class Game implements Runnable {
 		frame = new JFrame(NAME);
 		canvas = new Canvas();
 		
-		canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-		canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
-		canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setFocusable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(WIDTH, HEIGHT);
+		frame.setSize(width, height);
 
 		frame.add(canvas, BorderLayout.CENTER);
 
@@ -86,16 +83,16 @@ public class Game implements Runnable {
 	
 	public void init() {
 		
+		conveyor = new Conveyor(this);
+		
 		Assets.init();
 		
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
-		entityHandler = new EntityHandler();
 		
-		world = new World("resources/worlds/world1.lvl");
+		world = new World("resources/worlds/world1.lvl", conveyor);
 		
-		entityHandler.addEntity(new Frownie(WIDTH / 2, HEIGHT / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE));
-		entityHandler.addEntity(new Player(WIDTH  / 2 - Assets.DEFAULTRENDEREDSIZE  / 2, HEIGHT  / 2 - Assets.DEFAULTRENDEREDSIZE  / 2, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, keyHandler));
+		world = new World("resources/worlds/world1.lvl", conveyor);
 		
 	}
 
@@ -148,7 +145,6 @@ public class Game implements Runnable {
 		
 		keyHandler.tick();
 		world.tick();
-		entityHandler.tick();
 		
 	}
 
@@ -160,11 +156,9 @@ public class Game implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.fillRect(0, 0, width, height);
 		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		world.render(g);
-		entityHandler.render(g);
 		
 		if(showFPS) {
 			int x = 10;
@@ -179,6 +173,22 @@ public class Game implements Runnable {
 
 	public static void main(String[] args) {
 		new Game().start();
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+
+	public KeyHandler getKeyHandler() {
+		return keyHandler;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public int getWidth() {
+		return width;
 	}
 
 }

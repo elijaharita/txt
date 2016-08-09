@@ -13,6 +13,7 @@ public abstract class Block {
 	public static Block[] blocks = new Block[256];
 	public static Block grass = new Grass(0);
 	public static Block dirt = new Dirt(1);
+	public static Block stone = new Stone(2);
 
 	public int x;
 	public int y;
