@@ -63,7 +63,7 @@ public class Player extends Entity {
 	@Override
 	public void render(Graphics g) {
 		
-		g.drawImage(texture, x, y, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
+		g.drawString("@", x, y);
 		
 	}
 	
