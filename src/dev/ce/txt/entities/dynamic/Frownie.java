@@ -16,7 +16,7 @@ public class Frownie extends DynamicEntity {
 		super(x, y, width, height, conveyor);
 		
 		direction = new boolean[4];
-		texture = Assets.frownie;
+		texture = Assets.player;
 		
 	}
 

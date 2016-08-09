@@ -11,7 +11,7 @@ public class Assets {
 	public static final int RENDEREDSCALE = 8;
 	public static final int DEFAULTRENDEREDSIZE = DEFAULTSIZE * RENDEREDSCALE;
 	
-	public static BufferedImage player, grass, dirt, frownie;
+	public static BufferedImage player, grass, dirt, stone;
 	private static SpriteSheet spriteSheet;
 	
 	public static void init() {
@@ -21,7 +21,7 @@ public class Assets {
 		player = spriteSheet.getImage(0, 0);
 		grass = spriteSheet.getImage(1, 0);
 		dirt = spriteSheet.getImage(2, 0);
-		frownie = spriteSheet.getImage(3, 0);
+		stone = spriteSheet.getImage(3, 0);
 		
 	}
 	
