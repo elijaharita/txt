@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
-import dev.ce.txt.input.MouseHandler;
 import dev.ce.txt.scenes.Scene;
 import dev.ce.txt.scenes._Game;
 import dev.ce.txt.scenes._Menu;
@@ -39,7 +38,6 @@ public class Game implements Runnable {
 	public int tickCount = 0;
 	public Conveyor conveyor;
 	public KeyHandler keyHandler;
-	public MouseHandler mouseHandler;
 	
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -98,10 +96,10 @@ public class Game implements Runnable {
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
 		
-		//gameScene = new _Game(conveyor, "resources/worlds/world1.lvl");
-		menuScene = new _Menu(conveyor);
+		gameScene = new _Game(conveyor, "resources/worlds/world1.lvl");
+		//menuScene = new _Menu(conveyor);
 		
-		Scene.setScene(menuScene);
+		Scene.setScene(gameScene);
 		
 	}
 

@@ -10,9 +10,10 @@ public class Assets {
 	public static final int DEFAULTSIZE = 8;
 	public static final int RENDEREDSCALE = 8;
 	public static final int DEFAULTRENDEREDSIZE = DEFAULTSIZE * RENDEREDSCALE;
+	public static boolean perBlockMovement = true;
 	
 	public static BufferedImage player, grass, dirt, stone, ungenerated, npc;
-	private static SpriteSheet spriteSheet;
+	public static SpriteSheet spriteSheet;
 	
 	public static void init() {
 		
@@ -25,6 +26,9 @@ public class Assets {
 		stone = spriteSheet.getImage(4, 0);
 		npc = spriteSheet.getImage(5, 0);
 		
+	}
+	
+	public static void setTexturePack(int texturePack) {
 		
 	}
 	
