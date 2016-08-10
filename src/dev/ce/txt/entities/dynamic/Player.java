@@ -32,6 +32,11 @@ public class Player extends DynamicEntity {
 
 	@Override
 	public void tick() {
+		
+		ticksSinceLastMove++;
+		
+		System.out.println(ticksSinceLastMove);
+		
 		if (!Assets.perBlockMovement) {
 
 			if (keyHandler.up) {
@@ -69,28 +74,24 @@ public class Player extends DynamicEntity {
 
 				if (keyHandler.up) {
 					y -= Assets.DEFAULTRENDEREDSIZE;
+					ticksSinceLastMove = 0;
 				}
 
 				if (keyHandler.down) {
 					y += Assets.DEFAULTRENDEREDSIZE;
+					ticksSinceLastMove = 0;
 				}
 
 				if (keyHandler.left) {
 					x -= Assets.DEFAULTRENDEREDSIZE;
+					ticksSinceLastMove = 0;
 				}
 
 				if (keyHandler.right) {
 					x += Assets.DEFAULTRENDEREDSIZE;
+					ticksSinceLastMove = 0;
 				}
 
-				ticksSinceLastMove = 0;
-
-			}
-			
-			ticksSinceLastMove++;
-			
-			if (!keyHandler.down && !keyHandler.up && !keyHandler.left && !keyHandler.right) {
-				ticksSinceLastMove = 30;
 			}
 
 		}
