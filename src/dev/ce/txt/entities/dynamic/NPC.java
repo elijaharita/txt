@@ -6,12 +6,12 @@ import java.util.Random;
 import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
 
-public class Frownie extends DynamicEntity {
+public class NPC extends DynamicEntity {
 
 	private int speed = 3;
 	private boolean direction[];
 	
-	public Frownie(int x, int y, int width, int height, Conveyor conveyor) {
+	public NPC(int x, int y, int width, int height, Conveyor conveyor) {
 		
 		super(x, y, width, height, conveyor);
 		

@@ -11,17 +11,20 @@ public class Assets {
 	public static final int RENDEREDSCALE = 8;
 	public static final int DEFAULTRENDEREDSIZE = DEFAULTSIZE * RENDEREDSCALE;
 	
-	public static BufferedImage player, grass, dirt, stone;
+	public static BufferedImage player, grass, dirt, stone, ungenerated, npc;
 	private static SpriteSheet spriteSheet;
 	
 	public static void init() {
 		
 		spriteSheet = new SpriteSheet(ImageHandler.loadImage("/textures/spritesheet.png"));
 		
-		player = spriteSheet.getImage(0, 0);
-		grass = spriteSheet.getImage(1, 0);
-		dirt = spriteSheet.getImage(2, 0);
-		stone = spriteSheet.getImage(3, 0);
+		ungenerated = spriteSheet.getImage(0, 0);
+		player = spriteSheet.getImage(1, 0);
+		grass = spriteSheet.getImage(2, 0);
+		dirt = spriteSheet.getImage(3, 0);
+		stone = spriteSheet.getImage(4, 0);
+		npc = spriteSheet.getImage(5, 0);
+		
 		
 	}
 	

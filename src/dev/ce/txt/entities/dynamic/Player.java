@@ -31,27 +31,27 @@ public class Player extends DynamicEntity {
 	public void tick() {
 		
 		if (keyHandler.up) {
-			ySpeed = -speed;
+			//ySpeed = -speed;
 		}
 
 		if (keyHandler.down) {
-			ySpeed = speed;
+			//ySpeed = speed;
 		} 
 		
 		else if(!keyHandler.down && !keyHandler.up) {
-			ySpeed = 0;
+			//ySpeed = 0;
 		}
 
 		if (keyHandler.left) {
-			xSpeed = -speed;
+			//xSpeed = -speed;
 		}
 
 		if (keyHandler.right) {
-			xSpeed = speed;
+			//xSpeed = speed;
 		}
 		
 		else if(!keyHandler.left && !keyHandler.right) {
-			xSpeed = 0;
+			//xSpeed = 0;
 		}
 		
 		if (x < 0){
