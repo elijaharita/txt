@@ -13,8 +13,9 @@ public class Player extends DynamicEntity {
 	private Conveyor conveyor;
 	private KeyHandler keyHandler;
 
-	// This variable is only used in per-block movement
-	private int ticksSinceLastMove;
+	// These variables only used in per-block movement
+	private int ticksSinceLastMoveX;
+	private int ticksSinceLastMoveY;
 
 	public Player(int x, int y, int width, int height, Conveyor conveyor) {
 
@@ -32,9 +33,10 @@ public class Player extends DynamicEntity {
 
 	@Override
 	public void tick() {
-		
-		ticksSinceLastMove++;
-		
+
+		ticksSinceLastMoveY++;
+		ticksSinceLastMoveX++;
+
 		if (!Assets.perBlockMovement) {
 
 			if (keyHandler.up) {
@@ -68,26 +70,30 @@ public class Player extends DynamicEntity {
 			x = (int) Math.floor(x / Assets.DEFAULTRENDEREDSIZE) * Assets.DEFAULTRENDEREDSIZE;
 			y = (int) Math.floor(y / Assets.DEFAULTRENDEREDSIZE) * Assets.DEFAULTRENDEREDSIZE;
 
-			if (ticksSinceLastMove >= Assets.DEFAULTRENDEREDSIZE / speed) {
+			if (ticksSinceLastMoveY >= Assets.DEFAULTRENDEREDSIZE / speed) {
 
 				if (keyHandler.up) {
 					y -= Assets.DEFAULTRENDEREDSIZE;
-					ticksSinceLastMove = 0;
+					ticksSinceLastMoveY = 0;
 				}
 
 				if (keyHandler.down) {
 					y += Assets.DEFAULTRENDEREDSIZE;
-					ticksSinceLastMove = 0;
+					ticksSinceLastMoveY = 0;
 				}
+
+			}
+
+			if (ticksSinceLastMoveX >= Assets.DEFAULTRENDEREDSIZE / speed) {
 
 				if (keyHandler.left) {
 					x -= Assets.DEFAULTRENDEREDSIZE;
-					ticksSinceLastMove = 0;
+					ticksSinceLastMoveX = 0;
 				}
 
 				if (keyHandler.right) {
 					x += Assets.DEFAULTRENDEREDSIZE;
-					ticksSinceLastMove = 0;
+					ticksSinceLastMoveX = 0;
 				}
 
 			}
