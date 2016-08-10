@@ -13,8 +13,7 @@ import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIHandler;
 
 public class _Menu extends Scene {
-
-	public JPanel panel;
+	
 	public JButton play;
 	public JFrame frame;
 
@@ -47,6 +46,26 @@ public class _Menu extends Scene {
 	@Override
 	public void render(Graphics g) {
 		guiHandler.render(g);
+	}
+	
+	class _Options extends Scene {
+		
+		
+
+		public _Options(Conveyor conveyor) {
+			super(conveyor);
+		}
+
+		@Override
+		public void tick() {
+			
+		}
+
+		@Override
+		public void render(Graphics g) {
+			
+		}
+		
 	}
 
 }

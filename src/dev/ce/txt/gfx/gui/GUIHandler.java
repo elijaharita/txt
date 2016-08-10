@@ -37,7 +37,6 @@ public class GUIHandler {
 	public void onMouseRelease(MouseEvent e) {
 		for(GUIObject object : objects) {
 			object.onMouseRelease(e);
-			System.out.println("mouse release");
 		}
 	}
 	
