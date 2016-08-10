@@ -32,6 +32,7 @@ public class Player extends DynamicEntity {
 
 	@Override
 	public void tick() {
+		
 		if (!Assets.perBlockMovement) {
 
 			if (keyHandler.up) {
@@ -93,30 +94,6 @@ public class Player extends DynamicEntity {
 				ticksSinceLastMove = 30;
 			}
 
-		}
-
-		if (x < 0)
-
-		{
-			x = 0;
-		}
-
-		if (y < 0)
-
-		{
-			y = 0;
-		}
-
-		if (x >= conveyor.getWorld().getWidth() * Assets.DEFAULTRENDEREDSIZE - 8)
-
-		{
-			x = conveyor.getWorld().getWidth() * Assets.DEFAULTRENDEREDSIZE - 8;
-		}
-
-		if (y >= conveyor.getWorld().getHeight() * Assets.DEFAULTRENDEREDSIZE + 8)
-
-		{
-			y = conveyor.getWorld().getHeight() * Assets.DEFAULTRENDEREDSIZE + 8;
 		}
 
 		move();

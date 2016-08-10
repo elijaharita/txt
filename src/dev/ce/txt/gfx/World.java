@@ -41,7 +41,7 @@ public class World {
 				if (chance == 1) {
 					if (getBlock(x + 1, y) == Block.grass || getBlock(x + 1, y) == Block.grass || getBlock(x - 1, y) == Block.grass || getBlock(x, y - 1) == Block.grass) {
 						if (getBlock(x, y) == Block.dirt) {
-							blocks[x][y] = 0;
+							blocks[x][y] = 1;
 						}
 					}
 				}
@@ -83,7 +83,6 @@ public class World {
 		height = Util.parseInt(tokens[1]);
 		spawnX = Util.parseInt(tokens[2]) - 1;
 		spawnY = Util.parseInt(tokens[3]) - 1;
-
 		blocks = new int[width][height];
 
 		for (int x = 0; x < width; x++) {
