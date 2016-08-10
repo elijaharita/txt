@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
+import dev.ce.txt.input.MouseHandler;
 import dev.ce.txt.scenes.Scene;
 import dev.ce.txt.scenes._Game;
 import dev.ce.txt.scenes._Menu;
@@ -29,8 +30,8 @@ public class Game implements Runnable {
 	public int width = 420 * scale;
 	public int height = width / 16 * 9;
 	
-	private JFrame frame;
-	private Canvas canvas;
+	public JFrame frame;
+	public Canvas canvas;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private World world;
 
@@ -38,6 +39,7 @@ public class Game implements Runnable {
 	public int tickCount = 0;
 	public Conveyor conveyor;
 	public KeyHandler keyHandler;
+	public MouseHandler mouseHandler;
 	
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -62,10 +64,10 @@ public class Game implements Runnable {
 
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.pack();
-		frame.setVisible(true);
 		frame.setFocusable(true);
 		frame.requestFocus();
+		frame.pack();
+		frame.setVisible(true);
 
 	}
 
@@ -94,12 +96,17 @@ public class Game implements Runnable {
 		Assets.init();
 		
 		keyHandler = new KeyHandler();
+		mouseHandler = new MouseHandler();
 		frame.addKeyListener(keyHandler);
+		frame.addMouseListener(mouseHandler);
+		frame.addMouseMotionListener(mouseHandler);
+		canvas.addMouseMotionListener(mouseHandler);
+		canvas.addMouseListener(mouseHandler);
 		
-		gameScene = new _Game(conveyor, "resources/worlds/world1.lvl");
-		//menuScene = new _Menu(conveyor);
+		gameScene = new _Game(conveyor);
+		menuScene = new _Menu(conveyor);
 		
-		Scene.setScene(gameScene);
+		Scene.setScene(menuScene);
 		
 	}
 
@@ -179,7 +186,8 @@ public class Game implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		new Game().start();
+		Game game = new Game();
+		game.start();
 	}
 	
 	public World getWorld() {
@@ -200,6 +208,18 @@ public class Game implements Runnable {
 	
 	public _Game getGameScene() {
 		return gameScene;
+	}
+	
+	public void setGameScene(_Game gameScene) {
+		this.gameScene = gameScene;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	public MouseHandler getMouseHandler() {
+		return mouseHandler;
 	}
 
 }

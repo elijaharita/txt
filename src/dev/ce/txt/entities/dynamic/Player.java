@@ -35,8 +35,6 @@ public class Player extends DynamicEntity {
 		
 		ticksSinceLastMove++;
 		
-		System.out.println(ticksSinceLastMove);
-		
 		if (!Assets.perBlockMovement) {
 
 			if (keyHandler.up) {

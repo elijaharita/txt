@@ -17,7 +17,7 @@ public class SpriteSheet {
 	}
 	
 	public BufferedImage getImage(int x, int y, int width, int height) {
-		return spriteSheet.getSubimage(x * Assets.DEFAULTSIZE, y * Assets.DEFAULTSIZE, width, height);
+		return spriteSheet.getSubimage(x * Assets.DEFAULTSIZE, y * Assets.DEFAULTSIZE, width * Assets.DEFAULTSIZE, height * Assets.DEFAULTSIZE);
 	}
 	
 	

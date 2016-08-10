@@ -3,7 +3,7 @@ package dev.ce.txt;
 import dev.ce.txt.gfx.Camera;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
-import dev.ce.txt.scenes.Scene;
+import dev.ce.txt.input.MouseHandler;
 
 public class Conveyor {
 
@@ -35,6 +35,10 @@ public class Conveyor {
 	
 	public Camera getCamera() {
 		return game.getGameScene().getWorld().getCamera();
+	}
+
+	public MouseHandler getMouseHandler() {
+		return game.getMouseHandler();
 	}
 	
 }

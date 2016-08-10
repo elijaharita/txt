@@ -10,10 +10,10 @@ public class _Game extends Scene {
 	public World world;
 	public boolean paused = false;
 	
-	public _Game(Conveyor conveyor, String worldPath) {
+	public _Game(Conveyor conveyor) {
 		super(conveyor);
 		
-		world = new World(worldPath, conveyor);
+		world = new World(conveyor);
 	}
 
 	@Override
