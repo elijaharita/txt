@@ -26,10 +26,9 @@ public class World {
 	
 	private EntityHandler entityHandler;
 		
-	public World(String worldPath, Conveyor conveyor) {
+	public World(Conveyor conveyor) {
 		this.conveyor = conveyor;
 		camera = new Camera(conveyor);
-		loadWorld(worldPath);
 	}
 
 	public void tick() {
