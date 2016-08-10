@@ -14,11 +14,18 @@ import javax.swing.JFrame;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
+import dev.ce.txt.input.MouseHandler;
+import dev.ce.txt.scenes.Scene;
+import dev.ce.txt.scenes._Game;
+import dev.ce.txt.scenes._Menu;
 
 public class Game implements Runnable {
 
 	public static final String NAME = "txt";
 
+	public _Game gameScene;
+	public _Menu menuScene;
+	
 	public int scale = 3;
 	public int width = 420 * scale;
 	public int height = width / 16 * 9;
@@ -26,12 +33,13 @@ public class Game implements Runnable {
 	private JFrame frame;
 	private Canvas canvas;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-	private KeyHandler keyHandler;
 	private World world;
 
 	public boolean running = false;
 	public int tickCount = 0;
 	public Conveyor conveyor;
+	public KeyHandler keyHandler;
+	public MouseHandler mouseHandler;
 	
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -90,9 +98,10 @@ public class Game implements Runnable {
 		keyHandler = new KeyHandler();
 		frame.addKeyListener(keyHandler);
 		
-		world = new World("resources/worlds/world1.lvl", conveyor);
+		//gameScene = new _Game(conveyor, "resources/worlds/world1.lvl");
+		menuScene = new _Menu(conveyor);
 		
-		world = new World("resources/worlds/world1.lvl", conveyor);
+		Scene.setScene(menuScene);
 		
 	}
 
@@ -144,7 +153,7 @@ public class Game implements Runnable {
 		}
 		
 		keyHandler.tick();
-		world.tick();
+		Scene.getScene().tick();
 		
 	}
 
@@ -158,7 +167,7 @@ public class Game implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, width, height);
 		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		world.render(g);
+		Scene.getScene().render(g);
 		
 		if(showFPS) {
 			int x = 10;
@@ -189,6 +198,10 @@ public class Game implements Runnable {
 	
 	public int getWidth() {
 		return width;
+	}
+	
+	public _Game getGameScene() {
+		return gameScene;
 	}
 
 }

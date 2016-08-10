@@ -22,6 +22,10 @@ public class Player extends DynamicEntity {
 		texture = Assets.player;
 
 	}
+	
+	public void smoothMove() {
+		
+	}
 
 	@Override
 	public void tick() {
@@ -74,7 +78,7 @@ public class Player extends DynamicEntity {
 	@Override
 	public void render(Graphics g) {
 		
-		g.drawImage(texture, (int) (Math.floor(x / Assets.DEFAULTRENDEREDSIZE) * Assets.DEFAULTRENDEREDSIZE - conveyor.getCamera().getXOffset()), y - conveyor.getCamera().getYOffset(), Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
+		g.drawImage(texture, x - conveyor.getCamera().getXOffset(), y - conveyor.getCamera().getYOffset(), Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
 	}
 
 }

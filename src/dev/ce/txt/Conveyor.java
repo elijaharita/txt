@@ -3,6 +3,7 @@ package dev.ce.txt;
 import dev.ce.txt.gfx.Camera;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
+import dev.ce.txt.scenes.Scene;
 
 public class Conveyor {
 
@@ -17,7 +18,7 @@ public class Conveyor {
 	}
 	
 	public World getWorld() {
-		return game.getWorld();
+		return game.getGameScene().getWorld();
 	}
 	
 	public KeyHandler getKeyHandler() {
@@ -33,7 +34,7 @@ public class Conveyor {
 	}
 	
 	public Camera getCamera() {
-		return game.getWorld().getCamera();
+		return game.getGameScene().getWorld().getCamera();
 	}
 	
 }
