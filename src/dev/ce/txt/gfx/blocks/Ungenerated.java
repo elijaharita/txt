@@ -1,5 +1,11 @@
 package dev.ce.txt.gfx.blocks;
 
-public class Ungenerated {
+import dev.ce.txt.assets.Assets;
+
+public class Ungenerated extends Block {
+
+	public Ungenerated(int id) {
+		super(Assets.ungenerated, id);
+	}
 
 }
