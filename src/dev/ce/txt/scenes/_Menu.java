@@ -10,6 +10,7 @@ import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.gui.Button;
 import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIHandler;
+import dev.ce.txt.gfx.gui.GameString;
 
 public class _Menu extends Scene {
 	
@@ -23,8 +24,8 @@ public class _Menu extends Scene {
 		
 		conveyor.getMouseHandler().setGUIHandler(guiHandler);
 		optionsScene = new _Options(conveyor);
-
-		guiHandler.addObject(new Button(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
+		
+		guiHandler.addObject(new Button(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, "hi",
 				Assets.guiButton, new ClickListener() {
 
 					@Override
