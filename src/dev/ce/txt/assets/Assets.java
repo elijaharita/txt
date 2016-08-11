@@ -16,6 +16,7 @@ public class Assets {
 	public static BufferedImage guiButton[];
 	public static SpriteSheet spriteSheet;
 	public static SpriteSheet gui;
+	public static SpriteSheet characters;
 	
 	public static void init() {
 		
@@ -23,6 +24,7 @@ public class Assets {
 		
 		spriteSheet = new SpriteSheet(ImageHandler.loadImage("/textures/spritesheet.png"));
 		gui = new SpriteSheet(ImageHandler.loadImage("/textures/GUI.png"));
+		characters = new SpriteSheet(ImageHandler.loadImage("/textures/characters.png"));
 		
 		ungenerated = spriteSheet.getImage(0, 0);
 		player = spriteSheet.getImage(1, 0);
@@ -33,6 +35,8 @@ public class Assets {
 		
 		guiButton[0] = gui.getImage(0, 0, 8, 1);
 		guiButton[1] = gui.getImage(0, 1, 8, 1);
+		
+		
 		
 	}
 	

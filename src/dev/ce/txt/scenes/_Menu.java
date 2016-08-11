@@ -29,7 +29,6 @@ public class _Menu extends Scene {
 
 					@Override
 					public void onClick() {
-						System.out.println("clicked");
 						conveyor.getWorld().loadWorld("resources/worlds/world1.lvl");
 						Scene.setScene(conveyor.getGame().getGameScene());
 						conveyor.getGameScene().setPaused(false);
