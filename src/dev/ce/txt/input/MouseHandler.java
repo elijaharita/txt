@@ -60,7 +60,6 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 		
 		if (e.getButton() == MouseEvent.BUTTON2) {
 			rightClick = false;
-			
 		}
 		
 		

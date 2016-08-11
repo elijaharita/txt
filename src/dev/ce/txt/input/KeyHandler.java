@@ -5,13 +5,15 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-	public boolean up, down, left, right, stats;
+	public boolean up, down, left, right, stats, pause;
 	
 	private boolean keys[];
+	private boolean toggleKeys[];
 	
 	public KeyHandler() {
 		
 		keys = new boolean[1024];
+		toggleKeys = new boolean[1024];
 		
 	}
 	
@@ -22,6 +24,13 @@ public class KeyHandler implements KeyListener {
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
 		stats = keys[192];
+		pause = toggleKeys[KeyEvent.VK_ESCAPE];
+		
+		for(int i = 0; i < 1024; i++) {
+			if(toggleKeys[i] == true) {
+				toggleKeys[i] = false;
+			}
+		}
 		
 	}
 	
@@ -43,6 +52,7 @@ public class KeyHandler implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		
 		keys[e.getKeyCode()] = false;
+		toggleKeys[e.getKeyCode()] = true;
 		
 	}
 

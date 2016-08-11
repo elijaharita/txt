@@ -222,4 +222,8 @@ public class Game implements Runnable {
 		return mouseHandler;
 	}
 
+	public _Menu getMenuScene() {
+		return menuScene;
+	}
+
 }

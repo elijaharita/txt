@@ -4,6 +4,8 @@ import dev.ce.txt.gfx.Camera;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
 import dev.ce.txt.input.MouseHandler;
+import dev.ce.txt.scenes._Game;
+import dev.ce.txt.scenes._Menu;
 
 public class Conveyor {
 
@@ -39,6 +41,14 @@ public class Conveyor {
 
 	public MouseHandler getMouseHandler() {
 		return game.getMouseHandler();
+	}
+	
+	public _Game getGameScene() {
+		return game.getGameScene();
+	}
+	
+	public _Menu getMenuScene() {
+		return game.getMenuScene();
 	}
 	
 }
