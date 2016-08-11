@@ -30,6 +30,16 @@ public class _Game extends Scene {
 
 				}));
 		
+		guiHandler.addObject(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
+				Assets.guiButton, "options", new ClickListener() {
+
+					@Override
+					public void onClick() {
+						Scene.setScene(conveyor.getMenuScene());
+					}
+
+				}));
+		
 	}
 
 	@Override

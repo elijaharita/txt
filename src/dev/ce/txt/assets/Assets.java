@@ -23,9 +23,22 @@ public class Assets {
 		
 		guiButton = new BufferedImage[2];
 		
-		spriteSheet = new SpriteSheet(ImageHandler.loadImage("/textures/spritesheet.png"));
-		gui = new SpriteSheet(ImageHandler.loadImage("/textures/GUI.png"));
-		characters = new SpriteSheet(ImageHandler.loadImage("/textures/characters.png"));
+		setTexturePack("ASCII");
+		
+	}
+	
+	public static void setTexturePack(String path) {
+		path = "/textures/" + path;
+		spriteSheet = new SpriteSheet(ImageHandler.loadImage(path + "/spritesheet.png"));
+		System.out.println("changed texture pack: " + path + "/spritesheet.png");
+		gui = new SpriteSheet(ImageHandler.loadImage(path + "/GUI.png"));
+		characters = new SpriteSheet(ImageHandler.loadImage(path + "/characters.png"));
+		
+		loadImages();
+		
+	}
+	
+	public static void loadImages() {
 		
 		ungenerated = spriteSheet.getImage(0, 0);
 		player = spriteSheet.getImage(1, 0);
@@ -36,10 +49,6 @@ public class Assets {
 		
 		guiButton[0] = gui.getImage(0, 0, 8, 1);
 		guiButton[1] = gui.getImage(0, 1, 8, 1);
-		
-	}
-	
-	public static void setTexturePack(int texturePack) {
 		
 	}
 	

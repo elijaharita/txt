@@ -1,14 +1,15 @@
 package dev.ce.txt.scenes;
 
 import java.awt.Graphics;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
-import dev.ce.txt.gfx.gui.GUIButton;
 import dev.ce.txt.gfx.gui.ClickListener;
+import dev.ce.txt.gfx.gui.GUIButton;
 import dev.ce.txt.gfx.gui.GUIHandler;
 
 public class _Menu extends Scene {
@@ -17,12 +18,14 @@ public class _Menu extends Scene {
 	public JFrame frame;
 
 	private _Options optionsScene;
+	private _TexturePack texturePackScene;
 
 	public _Menu(Conveyor conveyor) {
 		super(conveyor);
 
 		conveyor.getMouseHandler().setGUIHandler(guiHandler);
 		optionsScene = new _Options(conveyor);
+		texturePackScene = new _TexturePack(conveyor);
 
 		guiHandler.addObject(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
 				Assets.guiButton, "Play", new ClickListener() {
@@ -52,6 +55,17 @@ public class _Menu extends Scene {
 					@Override
 					public void onClick() {
 						System.exit(0);
+					}
+
+				}));
+		
+		guiHandler.addObject(new GUIButton(20, 80 + Assets.DEFAULTRENDEREDSIZE * 3, Assets.DEFAULTRENDEREDSIZE * 8,
+				Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "texture packs", new ClickListener() {
+
+					@Override
+					public void onClick() {
+						Scene.setScene(texturePackScene);
+						
 					}
 
 				}));
@@ -94,7 +108,6 @@ public class _Menu extends Scene {
 
 						@Override
 						public void onClick() {
-							conveyor.getMouseHandler().setGUIHandler(conveyor.getMenuScene().getGUIHandler());
 							Scene.setScene(conveyor.getMenuScene());
 							
 						}
@@ -117,6 +130,73 @@ public class _Menu extends Scene {
 			return guiHandler;
 		}
 
+	}
+	
+	class _TexturePack extends Scene {
+
+		public GUIHandler guiHandler;
+		private int texturePacksLoaded;
+		private String[] files;
+		private File dir;
+		
+		public _TexturePack(Conveyor conveyor) {
+			super(conveyor);
+			
+			guiHandler = new GUIHandler(conveyor);
+			
+			guiHandler.addObject(new GUIButton(40 + Assets.DEFAULTRENDEREDSIZE * 8, 20 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
+					Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "back", new ClickListener() {
+
+						@Override
+						public void onClick() {
+							Scene.setScene(conveyor.getMenuScene());
+							
+						}
+
+					}));
+			
+			initializeTexturePacks("resources/textures/");
+			
+		}
+		
+		public void initializeTexturePacks(String path) {
+			dir = new File(path);
+			files = dir.list();
+			for(String file : files) {
+				System.out.println(file);
+				loadTexturePack(file);
+				texturePacksLoaded++;
+			}
+			
+		}
+		
+		public void loadTexturePack(String path) {
+			
+			guiHandler.addObject(new GUIButton(20, 20 + 20 * texturePacksLoaded + Assets.DEFAULTRENDEREDSIZE * texturePacksLoaded, Assets.DEFAULTRENDEREDSIZE * 8,
+					Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, path, new ClickListener() {
+
+				@Override
+				public void onClick() {
+					Assets.setTexturePack(path);
+				}
+				
+			}));
+		}
+
+		@Override
+		public void tick() {
+			guiHandler.tick();
+		}
+
+		@Override
+		public void render(Graphics g) {
+			guiHandler.render(g);
+		}
+		
+		public GUIHandler getGUIHandler() {
+			return guiHandler;
+		}
+		
 	}
 
 }
