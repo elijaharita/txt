@@ -11,6 +11,7 @@ public class Assets {
 	public static final int RENDEREDSCALE = 8;
 	public static final int DEFAULTRENDEREDSIZE = DEFAULTSIZE * RENDEREDSCALE;
 	public static boolean perBlockMovement = true;
+	public static String perBlockMovementONOFF = "ON";
 	
 	public static BufferedImage player, grass, dirt, stone, ungenerated, npc;
 	public static BufferedImage guiButton[];
