@@ -25,6 +25,7 @@ public class _Game extends Scene {
 
 					@Override
 					public void onClick() {
+						conveyor.getGameScene().getWorld().saveWorld();
 						Scene.setScene(conveyor.getMenuScene());
 					}
 
