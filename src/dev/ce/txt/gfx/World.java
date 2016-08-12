@@ -1,6 +1,8 @@
 package dev.ce.txt.gfx;
 
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 import dev.ce.txt.Conveyor;
@@ -135,13 +137,23 @@ public class World {
 	
 	public void saveWorld() {
 		
+		PrintWriter pw;
+		try {
+			pw = new PrintWriter(path);
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		Util.writeFile(path, width + "\t" + height + "\n" + (spawnX + 1) + "\t" + (spawnY + 1) + "\n");
+		
 		for (int x = 0; x < width; x++) {
 
 			String clump = "";
 			
 			for (int y = 0; y < height; y++) {
 
-				clump = clump + Integer.toString(blocks[x][y]) + "\t";
+				clump = clump + blocks[y][x] + "\t";
 				
 			}
 			
