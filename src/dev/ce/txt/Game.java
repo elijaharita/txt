@@ -26,9 +26,9 @@ public class Game implements Runnable {
 	public _Game gameScene;
 	public _Menu menuScene;
 	
-	public int scale = 3;
-	public int width = 576 * scale;
-	public int height = width / 16 * 9;
+	public int scale = 1;
+	public int width = 1366;
+	public int height = 768;
 	
 	public JFrame frame;
 	public Canvas canvas;

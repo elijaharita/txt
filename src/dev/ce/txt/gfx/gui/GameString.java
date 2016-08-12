@@ -28,7 +28,6 @@ public class GameString extends GUIObject {
 
 	public void setText(String text) {
 		for(int i = 0; i < text.length(); i++) {
-			System.out.println(i);
 			
 			letters[i] = text.charAt(i);
 		}
