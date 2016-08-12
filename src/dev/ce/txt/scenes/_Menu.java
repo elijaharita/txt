@@ -7,12 +7,9 @@ import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIButton;
-import dev.ce.txt.gfx.gui.GUIContainer;
 import dev.ce.txt.gfx.gui.GUIHandler;
 
 public class _Menu extends Scene {
-
-	public GUIContainer container;
 
 	private _Options optionsScene;
 	private _TexturePack texturePackScene;
@@ -24,8 +21,8 @@ public class _Menu extends Scene {
 		optionsScene = new _Options(conveyor);
 		texturePackScene = new _TexturePack(conveyor);
 
-		guiHandler.add(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
-				Assets.guiButton, "Play", new ClickListener() {
+		guiHandler.add(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8,
+				Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "Play", new ClickListener() {
 
 					@Override
 					public void onClick() {

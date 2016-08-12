@@ -3,6 +3,8 @@ package dev.ce.txt.gfx.gui;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dev.ce.txt.assets.Assets;
+
 public class GUIButton extends GUIObject {
 
 	private BufferedImage[] images;
@@ -43,6 +45,14 @@ public class GUIButton extends GUIObject {
 		
 		toggleable = true;
 		
+	}
+
+	public GUIButton(BufferedImage[] images, String title, ClickListener clickListener) {
+		super(0, 0, 8 * Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE);
+		this.images = images;
+		this.clickListener = clickListener;
+		gameString1 = new GameString(title, 32, x + (width - 32 * title.length()) / 2,
+				y + (height - 32) / 2);
 	}
 
 	@Override
