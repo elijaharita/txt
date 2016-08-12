@@ -3,19 +3,16 @@ package dev.ce.txt.scenes;
 import java.awt.Graphics;
 import java.io.File;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIButton;
+import dev.ce.txt.gfx.gui.GUIContainer;
 import dev.ce.txt.gfx.gui.GUIHandler;
 
 public class _Menu extends Scene {
 
-	public JButton play;
-	public JFrame frame;
+	public GUIContainer container;
 
 	private _Options optionsScene;
 	private _TexturePack texturePackScene;
@@ -27,7 +24,7 @@ public class _Menu extends Scene {
 		optionsScene = new _Options(conveyor);
 		texturePackScene = new _TexturePack(conveyor);
 
-		guiHandler.addObject(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
+		guiHandler.add(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
 				Assets.guiButton, "Play", new ClickListener() {
 
 					@Override
@@ -39,7 +36,7 @@ public class _Menu extends Scene {
 
 				}));
 
-		guiHandler.addObject(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
+		guiHandler.add(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
 				Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "Options", new ClickListener() {
 
 					@Override
@@ -49,7 +46,7 @@ public class _Menu extends Scene {
 
 				}));
 		
-		guiHandler.addObject(new GUIButton(20, 60 + Assets.DEFAULTRENDEREDSIZE * 2, Assets.DEFAULTRENDEREDSIZE * 8,
+		guiHandler.add(new GUIButton(20, 60 + Assets.DEFAULTRENDEREDSIZE * 2, Assets.DEFAULTRENDEREDSIZE * 8,
 				Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "quit", new ClickListener() {
 
 					@Override
@@ -59,7 +56,7 @@ public class _Menu extends Scene {
 
 				}));
 		
-		guiHandler.addObject(new GUIButton(20, 80 + Assets.DEFAULTRENDEREDSIZE * 3, Assets.DEFAULTRENDEREDSIZE * 8,
+		guiHandler.add(new GUIButton(20, 80 + Assets.DEFAULTRENDEREDSIZE * 3, Assets.DEFAULTRENDEREDSIZE * 8,
 				Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "texture packs", new ClickListener() {
 
 					@Override
@@ -92,7 +89,7 @@ public class _Menu extends Scene {
 			super(conveyor);
 			guiHandler = new GUIHandler(conveyor);
 
-			guiHandler.addObject(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
+			guiHandler.add(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
 					Assets.guiButton, "Blocky Movement", "Smooth Movement", new ClickListener() {
 
 						@Override
@@ -103,7 +100,7 @@ public class _Menu extends Scene {
 
 					}));
 
-			guiHandler.addObject(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
+			guiHandler.add(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
 					Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "back", new ClickListener() {
 
 						@Override
@@ -144,7 +141,7 @@ public class _Menu extends Scene {
 			
 			guiHandler = new GUIHandler(conveyor);
 			
-			guiHandler.addObject(new GUIButton(40 + Assets.DEFAULTRENDEREDSIZE * 8, 20 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
+			guiHandler.add(new GUIButton(40 + Assets.DEFAULTRENDEREDSIZE * 8, 20 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8,
 					Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "back", new ClickListener() {
 
 						@Override
@@ -172,7 +169,7 @@ public class _Menu extends Scene {
 		
 		public void loadTexturePack(String path) {
 			
-			guiHandler.addObject(new GUIButton(20, 20 + 20 * texturePacksLoaded + Assets.DEFAULTRENDEREDSIZE * texturePacksLoaded, Assets.DEFAULTRENDEREDSIZE * 8,
+			guiHandler.add(new GUIButton(20, 20 + 20 * texturePacksLoaded + Assets.DEFAULTRENDEREDSIZE * texturePacksLoaded, Assets.DEFAULTRENDEREDSIZE * 8,
 					Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, path, new ClickListener() {
 
 				@Override

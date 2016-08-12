@@ -11,6 +11,12 @@ public class GUIHandler {
 	private Conveyor conveyor;
 	private ArrayList<GUIObject> objects;
 	
+	public void addPanel(GUIObject[] objects) {
+		for(GUIObject object : objects) {
+			add(object);
+		}
+	}
+	
 	public GUIHandler(Conveyor conveyor) {
 		this.conveyor = conveyor;
 		objects = new ArrayList<GUIObject>();
@@ -40,11 +46,11 @@ public class GUIHandler {
 		}
 	}
 	
-	public void addObject(GUIObject object) {
+	public void add(GUIObject object) {
 		objects.add(object);
 	}
 	
-	public void removeObject(GUIObject object) {
+	public void remove(GUIObject object) {
 		objects.remove(object);
 	}
 	

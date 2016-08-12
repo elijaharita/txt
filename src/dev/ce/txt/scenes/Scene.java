@@ -12,6 +12,7 @@ public abstract class Scene {
 	
 	public static Scene currentScene;
 	
+	@SuppressWarnings("static-access")
 	public Scene(Conveyor conveyor) {
 		this.conveyor = conveyor;
 		guiHandler = new GUIHandler(conveyor);

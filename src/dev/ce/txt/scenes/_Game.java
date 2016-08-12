@@ -20,7 +20,7 @@ public class _Game extends Scene {
 		
 		world = new World(conveyor);
 		
-		guiHandler.addObject(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
+		guiHandler.add(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
 				Assets.guiButton, "Quit to menu", new ClickListener() {
 
 					@Override
@@ -30,7 +30,7 @@ public class _Game extends Scene {
 
 				}));
 		
-		guiHandler.addObject(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
+		guiHandler.add(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
 				Assets.guiButton, "options", new ClickListener() {
 
 					@Override
