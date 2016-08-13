@@ -16,19 +16,17 @@ public abstract class Block {
 	public static Block dirt = new Dirt(2);
 	public static Block stone = new Stone(3);
 
-
 	public int x;
 	public int y;
 	
-	public Block(BufferedImage texture, int id) {
-		this.texture = texture;
+	public Block(int id) {
 		this.id = id;
 		
 		blocks[id] = this;
 	}
 	
 	public void render(Graphics g, int x, int y) {
-		g.drawImage(texture, x, y, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
+		g.drawImage(texture(), x, y, Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE, null);
 	}
 	
 	public void tick() {
@@ -38,5 +36,7 @@ public abstract class Block {
 	public int getId() {
 		return id;
 	}
+	
+	public abstract BufferedImage texture();
 	
 }

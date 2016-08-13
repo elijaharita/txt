@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import dev.ce.txt.gfx.ImageHandler;
 import dev.ce.txt.gfx.SpriteSheet;
+import dev.ce.txt.gfx.blocks.Block;
 
 public class Assets {
 	
@@ -29,9 +30,9 @@ public class Assets {
 	}
 	
 	public static void setTexturePack(String path) {
+		
 		path = "/textures/" + path;
 		spriteSheet = new SpriteSheet(ImageHandler.loadImage(path + "/spritesheet.png"));
-		System.out.println("changed texture pack: " + path + "/spritesheet.png");
 		gui = new SpriteSheet(ImageHandler.loadImage(path + "/GUI.png"));
 		characters = new SpriteSheet(ImageHandler.loadImage(path + "/characters.png"));
 		

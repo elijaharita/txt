@@ -25,14 +25,13 @@ public class _Game extends Scene {
 		 * guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, yCoord,
 				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "text1",
 				"text2", new ClickListener() {
-
 					@Override
 					public void onClick() {
 						whathappenswhenclickedhere
+						conveyor.getGameScene().getWorld().saveWorld();
+						Scene.setScene(conveyor.getMenuScene());
 					}
-
 				}));
-		 * 
 		 */
 		
 		
