@@ -139,7 +139,58 @@ public class Assets {
 			
 		case 'z':
 			return characters.getImage(1, 3);
-			
+		case '0':
+			return characters.getImage(2, 3);
+		case '1':
+			return characters.getImage(3, 3);
+		case '2':
+			return characters.getImage(4, 3);
+		case '3':
+			return characters.getImage(5, 3);
+		case '4':
+			return characters.getImage(6, 3);
+		case '5':
+			return characters.getImage(7, 3);
+		case '6':
+			return characters.getImage(0, 4);
+		case '7':
+			return characters.getImage(1, 4);
+		case '8':
+			return characters.getImage(2, 4);
+		case '9':
+			return characters.getImage(3, 4);
+		case '.':
+			return characters.getImage(4, 4);
+		case ',':
+			return characters.getImage(5, 4);
+		case ':':
+			return characters.getImage(6, 4);
+		case ';':
+			return characters.getImage(7, 4);
+		case '\'':
+			return characters.getImage(0, 5);
+		case '\"':
+			return characters.getImage(1, 5);
+		case '!':
+			return characters.getImage(2, 5);
+		case '?':
+			return characters.getImage(3, 5);
+		case '$':
+			return characters.getImage(4, 5);
+		case '%':
+			return characters.getImage(5, 5);
+		case '(':
+			return characters.getImage(6, 5);
+		case ')':
+			return characters.getImage(7, 5);
+		case '-':
+			return characters.getImage(0, 6);
+		case '=':
+			return characters.getImage(1, 6);
+		case '+':
+			return characters.getImage(2, 6);
+		case '/':
+			return characters.getImage(3, 6);
 		}
 		
 		return null;

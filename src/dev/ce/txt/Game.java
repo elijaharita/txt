@@ -18,6 +18,8 @@ import dev.ce.txt.input.MouseHandler;
 import dev.ce.txt.scenes.Scene;
 import dev.ce.txt.scenes._Game;
 import dev.ce.txt.scenes._Menu;
+import dev.ce.txt.scenes._Options;
+import dev.ce.txt.scenes._PlayMenu;
 
 public class Game implements Runnable {
 
@@ -25,6 +27,8 @@ public class Game implements Runnable {
 
 	public _Game gameScene;
 	public _Menu menuScene;
+	public _Options optionsScene;
+	public _PlayMenu playMenuScene;
 	
 	public int scale = 1;
 	public int width = 1366;
@@ -105,6 +109,8 @@ public class Game implements Runnable {
 		
 		gameScene = new _Game(conveyor);
 		menuScene = new _Menu(conveyor);
+		optionsScene = new _Options(conveyor);
+		playMenuScene = new _PlayMenu(conveyor);
 		
 		Scene.setScene(menuScene);
 		
@@ -170,6 +176,7 @@ public class Game implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
+		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, width, height);
 		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		Scene.getScene().render(g);
@@ -225,5 +232,14 @@ public class Game implements Runnable {
 	public _Menu getMenuScene() {
 		return menuScene;
 	}
+	
+	public _Options getOptionsScene() {
+		return optionsScene;
+	}
+	
+	public _PlayMenu getPlayMenuScene(){
+		return playMenuScene;
+	}
+	
 
 }

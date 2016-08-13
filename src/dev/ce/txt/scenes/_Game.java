@@ -7,6 +7,7 @@ import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.World;
 import dev.ce.txt.gfx.gui.GUIButton;
+import dev.ce.txt.gfx.gui.GameString;
 import dev.ce.txt.gfx.gui.ClickListener;
 
 public class _Game extends Scene {
@@ -20,22 +21,37 @@ public class _Game extends Scene {
 		
 		world = new World(conveyor);
 		
-		guiHandler.add(new GUIButton(20, 20, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
-				Assets.guiButton, "Quit to menu", new ClickListener() {
+		/* COPY AND PASTE BUTTON
+		 * guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, yCoord,
+				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "text1",
+				"text2", new ClickListener() {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(conveyor.getMenuScene());
+						whathappenswhenclickedhere
 					}
 
 				}));
+		 * 
+		 */
 		
-		guiHandler.add(new GUIButton(20, 40 + Assets.DEFAULTRENDEREDSIZE, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE,
-				Assets.guiButton, "options", new ClickListener() {
+		
+		guiHandler.add(new  GameString("PAUSED", 60, conveyor.getGameWidth() / 2 - 170, 10));
+		guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, 150,
+				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "options", new ClickListener() {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(conveyor.getMenuScene());
+						Scene.setScene(conveyor.getGame().getOptionsScene());
+					}
+
+				}));
+		guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, 225,
+				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "BACK TO MENU", new ClickListener() {
+
+					@Override
+					public void onClick() {
+						Scene.setScene(conveyor.getGame().getMenuScene());
 					}
 
 				}));
@@ -71,7 +87,7 @@ public class _Game extends Scene {
 		conveyor.getWorld().render(g);
 		
 		if(paused) {
-			g.setColor(new Color(0, 0, 0, 127));
+			g.setColor(new Color(0, 0, 0, 126));
 			g.fillRect(0, 0, conveyor.getGameWidth(), conveyor.getGameHeight());
 		}
 		
