@@ -2,9 +2,9 @@ package dev.ce.txt.assets;
 
 import java.awt.image.BufferedImage;
 
+import dev.ce.txt.blocks.Block;
 import dev.ce.txt.gfx.ImageHandler;
 import dev.ce.txt.gfx.SpriteSheet;
-import dev.ce.txt.gfx.blocks.Block;
 
 public class Assets {
 	
@@ -12,11 +12,11 @@ public class Assets {
 	public static final int RENDEREDSCALE = 8;
 	public static final int DEFAULTRENDEREDSIZE = DEFAULTSIZE * RENDEREDSCALE;
 	public static boolean perBlockMovement = true;
-	public static String perBlockMovementONOFF = "ON";
 	
 	public static BufferedImage player, grass, dirt, stone, ungenerated, npc;
 	public static BufferedImage guiButton[];
 	public static BufferedImage character[];
+	public static BufferedImage textArea;
 	public static SpriteSheet spriteSheet;
 	public static SpriteSheet gui;
 	public static SpriteSheet characters;
@@ -51,6 +51,7 @@ public class Assets {
 		
 		guiButton[0] = gui.getImage(0, 0, 8, 1);
 		guiButton[1] = gui.getImage(0, 1, 8, 1);
+		textArea = gui.getImage(0, 2, 8, 1);
 		
 	}
 	

@@ -1,4 +1,4 @@
-package dev.ce.txt.gfx;
+package dev.ce.txt.world;
 
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
@@ -8,9 +8,10 @@ import java.util.Random;
 import dev.ce.txt.Conveyor;
 import dev.ce.txt.Util;
 import dev.ce.txt.assets.Assets;
+import dev.ce.txt.blocks.Block;
 import dev.ce.txt.entities.EntityHandler;
 import dev.ce.txt.entities.dynamic.Player;
-import dev.ce.txt.gfx.blocks.Block;
+import dev.ce.txt.gfx.Camera;
 
 public class World {
 

@@ -5,9 +5,9 @@ import java.awt.Graphics;
 
 import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
-import dev.ce.txt.gfx.World;
 import dev.ce.txt.gfx.gui.GUIButton;
 import dev.ce.txt.gfx.gui.GameString;
+import dev.ce.txt.world.World;
 import dev.ce.txt.gfx.gui.ClickListener;
 
 public class _Game extends Scene {

@@ -1,4 +1,4 @@
-package dev.ce.txt.gfx.blocks;
+package dev.ce.txt.blocks;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

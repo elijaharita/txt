@@ -10,6 +10,7 @@ public abstract class GUIObject {
 	protected int x, y, width, height;
 	protected Rectangle bounds;
 	protected boolean hovering;
+	protected boolean focused;
 
 	public GUIObject(int x, int y, int width, int height) {
 
@@ -20,9 +21,9 @@ public abstract class GUIObject {
 		bounds = new Rectangle(x, y, width, height);
 
 	}
-	
+
 	public GUIObject() {
-		
+
 		bounds = new Rectangle(x, y, width, height);
 
 	}
@@ -42,10 +43,11 @@ public abstract class GUIObject {
 	}
 
 	public void onMouseRelease(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			if (hovering) {
-				onClick();
-			}
+		if (hovering) {
+			onClick();
+			focused = true;
+		} else {
+			focused = false;
 		}
 	}
 
@@ -56,11 +58,11 @@ public abstract class GUIObject {
 	public int getY() {
 		return y;
 	}
-	
+
 	public void setX(int x) {
 		this.x = x;
 	}
-	
+
 	public void setY(int y) {
 		this.y = y;
 	}

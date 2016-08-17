@@ -12,7 +12,6 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import dev.ce.txt.assets.Assets;
-import dev.ce.txt.gfx.World;
 import dev.ce.txt.input.KeyHandler;
 import dev.ce.txt.input.MouseHandler;
 import dev.ce.txt.scenes.Scene;
@@ -20,6 +19,7 @@ import dev.ce.txt.scenes._Game;
 import dev.ce.txt.scenes._Menu;
 import dev.ce.txt.scenes._Options;
 import dev.ce.txt.scenes._PlayMenu;
+import dev.ce.txt.world.World;
 
 public class Game implements Runnable {
 
