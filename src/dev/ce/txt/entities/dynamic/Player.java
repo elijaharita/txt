@@ -13,8 +13,6 @@ public class Player extends DynamicEntity {
 	private Conveyor conveyor;
 	private KeyHandler keyHandler;
 
-	// These variables only used in per-block movement
-
 	public Player(int x, int y, int width, int height, Conveyor conveyor) {
 
 		super(x, y, width, height, conveyor);
@@ -22,10 +20,6 @@ public class Player extends DynamicEntity {
 		this.keyHandler = conveyor.getKeyHandler();
 
 		texture = Assets.entity;
-
-	}
-
-	public void smoothMove() {
 
 	}
 
