@@ -29,11 +29,11 @@ public class Game implements Runnable {
 	public _Menu menuScene;
 	public _Options optionsScene;
 	public _PlayMenu playMenuScene;
-	
+
 	public int scale = 1;
 	public int width = 1366;
 	public int height = 768;
-	
+
 	public JFrame frame;
 	public Canvas canvas;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -44,7 +44,7 @@ public class Game implements Runnable {
 	public Conveyor conveyor;
 	public KeyHandler keyHandler;
 	public MouseHandler mouseHandler;
-	
+
 	private Thread thread;
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private int frames;
@@ -54,7 +54,7 @@ public class Game implements Runnable {
 
 		frame = new JFrame(NAME);
 		canvas = new Canvas();
-		
+
 		canvas.setMinimumSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setPreferredSize(new Dimension(width, height));
@@ -82,9 +82,9 @@ public class Game implements Runnable {
 	}
 
 	public void stop() {
-		
+
 		running = false;
-		
+
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
@@ -92,13 +92,13 @@ public class Game implements Runnable {
 		}
 
 	}
-	
+
 	public void init() {
-		
+
 		conveyor = new Conveyor(this);
-		
+
 		Assets.init();
-		
+
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 		frame.addKeyListener(keyHandler);
@@ -106,20 +106,20 @@ public class Game implements Runnable {
 		frame.addMouseMotionListener(mouseHandler);
 		canvas.addMouseMotionListener(mouseHandler);
 		canvas.addMouseListener(mouseHandler);
-		
+
 		gameScene = new _Game(conveyor);
 		menuScene = new _Menu(conveyor);
 		optionsScene = new _Options(conveyor);
 		playMenuScene = new _PlayMenu(conveyor);
-		
+
 		Scene.setScene(menuScene);
-		
+
 	}
 
 	public void run() {
-		
+
 		init();
-		
+
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D / 60D;
 
@@ -154,18 +154,22 @@ public class Game implements Runnable {
 	}
 
 	public void tick() {
-		
+
 		showFPS = keyHandler.stats;
-		
+
 		tickCount++;
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = i / 7 + tickCount;
 		}
-		
-		keyHandler.tick();
+
 		Scene.getScene().tick();
-		
+		if (Scene.getSubScene() != null) {
+			Scene.getSubScene().tick();
+		} else {
+			keyHandler.tick();
+		}
+
 	}
 
 	public void render() {
@@ -178,10 +182,16 @@ public class Game implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, width, height);
-		//g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		Scene.getScene().render(g);
+		// g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(),
+		// null);
 		
-		if(showFPS) {
+		if(Scene.getSubScene() != null) {
+			Scene.getSubScene().render(g);
+		} else {
+			Scene.getScene().render(g);
+		}
+
+		if (showFPS) {
 			int x = 10;
 			int y = 5;
 			g.setColor(Color.WHITE);
@@ -196,7 +206,7 @@ public class Game implements Runnable {
 		Game game = new Game();
 		game.start();
 	}
-	
+
 	public World getWorld() {
 		return world;
 	}
@@ -204,19 +214,19 @@ public class Game implements Runnable {
 	public KeyHandler getKeyHandler() {
 		return keyHandler;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public _Game getGameScene() {
 		return gameScene;
 	}
-	
+
 	public void setGameScene(_Game gameScene) {
 		this.gameScene = gameScene;
 	}
@@ -224,7 +234,7 @@ public class Game implements Runnable {
 	public JFrame getFrame() {
 		return frame;
 	}
-	
+
 	public MouseHandler getMouseHandler() {
 		return mouseHandler;
 	}
@@ -232,14 +242,13 @@ public class Game implements Runnable {
 	public _Menu getMenuScene() {
 		return menuScene;
 	}
-	
+
 	public _Options getOptionsScene() {
 		return optionsScene;
 	}
-	
-	public _PlayMenu getPlayMenuScene(){
+
+	public _PlayMenu getPlayMenuScene() {
 		return playMenuScene;
 	}
-	
 
 }

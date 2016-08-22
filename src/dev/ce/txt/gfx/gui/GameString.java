@@ -1,12 +1,14 @@
 package dev.ce.txt.gfx.gui;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import dev.ce.txt.assets.Assets;
 
 public class GameString extends GUIObject {
 
-	char letters[];
+	public char letters[];
+	public BufferedImage character[];
 	public int x, y;
 	public int fontSize;
 	public String text;
@@ -25,10 +27,13 @@ public class GameString extends GUIObject {
 
 	public void setText(String text) {
 		letters = new char[text.length()];
+		character = new BufferedImage[text.length()];
 		
 		for (int i = 0; i < text.length(); i++) {
 			letters[i] = text.charAt(i);
+			character[i] = Assets.getCharacterImage(letters[i]);
 		}
+		
 	}
 	
 	public String getText() {
@@ -39,7 +44,7 @@ public class GameString extends GUIObject {
 		
 		for (int i = 0; i < text.length(); i++) {
 
-			g.drawImage(Assets.getCharacterImage(letters[i]), x + i * fontSize, y, fontSize, fontSize, null);
+			g.drawImage(character[i], x + i * fontSize, y, fontSize, fontSize, null);
 			
 		}
 
@@ -51,7 +56,6 @@ public class GameString extends GUIObject {
 
 	@Override
 	public void onClick() {
-
 	}
 
 }

@@ -35,13 +35,13 @@ public class _Game extends Scene {
 		 */
 		
 		
-		guiHandler.add(new  GameString("PAUSED", 60, conveyor.getGameWidth() / 2 - 170, 10));
+		guiHandler.add(new GameString("PAUSED", 60, conveyor.getGameWidth() / 2 - 170, 10));
 		guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, 150,
-				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "options", new ClickListener() {
+				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "OPTIONS", new ClickListener() {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(conveyor.getGame().getOptionsScene());
+						Scene.setSubScene(conveyor.getGame().getOptionsScene());
 					}
 
 				}));

@@ -1,8 +1,6 @@
 package dev.ce.txt.assets;
 
 import java.awt.image.BufferedImage;
-
-import dev.ce.txt.blocks.Block;
 import dev.ce.txt.gfx.ImageHandler;
 import dev.ce.txt.gfx.SpriteSheet;
 
@@ -10,10 +8,11 @@ public class Assets {
 	
 	public static final int DEFAULTSIZE = 8;
 	public static final int RENDEREDSCALE = 8;
-	public static final int DEFAULTRENDEREDSIZE = DEFAULTSIZE * RENDEREDSCALE;
-	public static boolean perBlockMovement = true;
+	public static final int DEFAULTRENDEREDSIZE = 64;
 	
-	public static BufferedImage player, grass, dirt, stone, ungenerated, npc;
+	public static final String CHARACTERSTRING = " abcdefghijklmnopqrstuvwxyz0123456789.,:;'\"!?$%()-=+/";;
+	
+	public static BufferedImage cobblestone, grass, dirt, stone, ungenerated, entity;
 	public static BufferedImage guiButton[];
 	public static BufferedImage character[];
 	public static BufferedImage textArea;
@@ -25,14 +24,14 @@ public class Assets {
 		
 		guiButton = new BufferedImage[2];
 		
-		setTexturePack("ASCII");
+		setTexturePack("Graphics");
 		
 	}
 	
 	public static void setTexturePack(String path) {
 		
 		path = "/textures/" + path;
-		spriteSheet = new SpriteSheet(ImageHandler.loadImage(path + "/spritesheet.png"));
+		spriteSheet = new SpriteSheet(ImageHandler.loadImage(path + "/tiles.png"));
 		gui = new SpriteSheet(ImageHandler.loadImage(path + "/GUI.png"));
 		characters = new SpriteSheet(ImageHandler.loadImage(path + "/characters.png"));
 		
@@ -43,11 +42,11 @@ public class Assets {
 	public static void loadImages() {
 		
 		ungenerated = spriteSheet.getImage(0, 0);
-		player = spriteSheet.getImage(1, 0);
+		cobblestone = spriteSheet.getImage(1, 0);
 		grass = spriteSheet.getImage(2, 0);
 		dirt = spriteSheet.getImage(3, 0);
 		stone = spriteSheet.getImage(4, 0);
-		npc = spriteSheet.getImage(5, 0);
+		entity = spriteSheet.getImage(5, 0);
 		
 		guiButton[0] = gui.getImage(0, 0, 8, 1);
 		guiButton[1] = gui.getImage(0, 1, 8, 1);
@@ -63,138 +62,20 @@ public class Assets {
 	
 	public static BufferedImage getCharacter(char character) {
 		
-		switch(Character.toLowerCase(character)) {
-		case 'a':
-			return characters.getImage(0, 0);
-			
-		case 'b':
-			return characters.getImage(1, 0);
-
-		case 'c':
-			return characters.getImage(2, 0);
-			
-		case 'd':
-			return characters.getImage(3, 0);
-			
-		case 'e':
-			return characters.getImage(4, 0);
-			
-		case 'f':
-			return characters.getImage(5, 0);
-			
-		case 'g':
-			return characters.getImage(6, 0);
-			
-		case 'h':
-			return characters.getImage(7, 0);
-			
-		case 'i':
-			return characters.getImage(0, 1);
-			
-		case 'j':
-			return characters.getImage(1, 1);
-
-		case 'k':
-			return characters.getImage(2, 1);
-			
-		case 'l':
-			return characters.getImage(3, 1);
-			
-		case 'm':
-			return characters.getImage(4, 1);
-			
-		case 'n':
-			return characters.getImage(5, 1);
-			
-		case 'o':
-			return characters.getImage(6, 1);
-			
-		case 'p':
-			return characters.getImage(7, 1);
-			
-		case 'q':
-			return characters.getImage(0, 2);
-			
-		case 'r':
-			return characters.getImage(1, 2);
-			
-		case 's':
-			return characters.getImage(2, 2);
-			
-		case 't':
-			return characters.getImage(3, 2);
-			
-		case 'u':
-			return characters.getImage(4, 2);
-			
-		case 'v':
-			return characters.getImage(5, 2);
-			
-		case 'w':
-			return characters.getImage(6, 2);
-			
-		case 'x':
-			return characters.getImage(7, 2);
-			
-		case 'y':
-			return characters.getImage(0, 3);
-			
-		case 'z':
-			return characters.getImage(1, 3);
-		case '0':
-			return characters.getImage(2, 3);
-		case '1':
-			return characters.getImage(3, 3);
-		case '2':
-			return characters.getImage(4, 3);
-		case '3':
-			return characters.getImage(5, 3);
-		case '4':
-			return characters.getImage(6, 3);
-		case '5':
-			return characters.getImage(7, 3);
-		case '6':
-			return characters.getImage(0, 4);
-		case '7':
-			return characters.getImage(1, 4);
-		case '8':
-			return characters.getImage(2, 4);
-		case '9':
-			return characters.getImage(3, 4);
-		case '.':
-			return characters.getImage(4, 4);
-		case ',':
-			return characters.getImage(5, 4);
-		case ':':
-			return characters.getImage(6, 4);
-		case ';':
-			return characters.getImage(7, 4);
-		case '\'':
-			return characters.getImage(0, 5);
-		case '\"':
-			return characters.getImage(1, 5);
-		case '!':
-			return characters.getImage(2, 5);
-		case '?':
-			return characters.getImage(3, 5);
-		case '$':
-			return characters.getImage(4, 5);
-		case '%':
-			return characters.getImage(5, 5);
-		case '(':
-			return characters.getImage(6, 5);
-		case ')':
-			return characters.getImage(7, 5);
-		case '-':
-			return characters.getImage(0, 6);
-		case '=':
-			return characters.getImage(1, 6);
-		case '+':
-			return characters.getImage(2, 6);
-		case '/':
-			return characters.getImage(3, 6);
+		int charAt = 0;
+		char currentChar;
+		
+		for(int y = 0; y < characters.getWidth(); y++) {
+			for(int x = 0; x < characters.getHeight(); x++) {
+				currentChar = CHARACTERSTRING.charAt(charAt);
+				if(Character.toLowerCase(character) == currentChar) {
+					return characters.getImage(x, y);
+				}
+				charAt++;
+			}
 		}
 		
+		System.err.println("Couldn't find character: " + character);
 		return null;
 		
 	}

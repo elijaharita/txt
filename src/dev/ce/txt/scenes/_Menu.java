@@ -11,9 +11,12 @@ import dev.ce.txt.gfx.gui.GameString;
 
 public class _Menu extends Scene {
 
+	private _Options optionsScene;
+	
 	public _Menu(Conveyor conveyor) {
 		super(conveyor);
 
+		optionsScene = new _Options(conveyor);
 		conveyor.getMouseHandler().setGUIHandler(guiHandler);
 
 		/*
@@ -49,7 +52,7 @@ public class _Menu extends Scene {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(conveyor.getGame().getOptionsScene());
+						Scene.setSubScene(optionsScene);
 					}
 
 				}));

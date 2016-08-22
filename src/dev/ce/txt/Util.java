@@ -62,5 +62,11 @@ public class Util {
 		}
 
 	}
+	
+	public static void lerp(float num1, float num2, float amount) {
+		
+		num1 += (num2 - num1) / amount;
+		
+	}
 
 }

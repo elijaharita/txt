@@ -16,7 +16,7 @@ public class NPC extends DynamicEntity {
 		super(x, y, width, height, conveyor);
 		
 		direction = new boolean[4];
-		texture = Assets.player;
+		texture = Assets.entity;
 		
 	}
 

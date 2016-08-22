@@ -8,12 +8,11 @@ import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIButton;
 import dev.ce.txt.gfx.gui.GUIHandler;
+import dev.ce.txt.scenes.subscenes.SubScene;
 
-public class _Options extends Scene {
+public class _Options extends SubScene {
 
 	public GUIHandler guiHandler;
-
-	private boolean perBlockMovement;
 	
 	public _TexturePack texturePackScene;
 
@@ -22,25 +21,13 @@ public class _Options extends Scene {
 		guiHandler = new GUIHandler(conveyor);
 		texturePackScene = new _TexturePack(conveyor);
 
-		guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, 75,
-				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "Blocky Movement",
-				"Smooth Movement", new ClickListener() {
-
-					@Override
-					public void onClick() {
-						Assets.perBlockMovement = !Assets.perBlockMovement;
-						perBlockMovement = !perBlockMovement;
-					}
-
-				}));
-
 		guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, 150,
 				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "texture packs", 
 				new ClickListener() {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(texturePackScene);
+						Scene.setSubScene(texturePackScene);
 
 					}
 
@@ -52,7 +39,8 @@ public class _Options extends Scene {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(conveyor.getMenuScene());
+						
+						Scene.terminateSubScene();
 
 					}
 
@@ -74,7 +62,7 @@ public class _Options extends Scene {
 		return guiHandler;
 	}
 
-	class _TexturePack extends Scene {
+	class _TexturePack extends SubScene {
 
 		public GUIHandler guiHandler;
 		private int texturePacksLoaded;
@@ -92,7 +80,7 @@ public class _Options extends Scene {
 
 						@Override
 						public void onClick() {
-							Scene.setScene(conveyor.getGame().getOptionsScene());
+							Scene.setSubScene(conveyor.getGame().getOptionsScene());
 
 						}
 
