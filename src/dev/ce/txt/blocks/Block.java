@@ -20,9 +20,11 @@ public abstract class Block {
 	public int y;
 	
 	public Block(int id) {
+		
 		this.id = id;
 		
 		blocks[id] = this;
+		
 	}
 	
 	public void render(Graphics g, int x, int y) {

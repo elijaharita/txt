@@ -5,10 +5,10 @@ import java.awt.Graphics;
 
 import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
+import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIButton;
 import dev.ce.txt.gfx.gui.GameString;
 import dev.ce.txt.world.World;
-import dev.ce.txt.gfx.gui.ClickListener;
 
 public class _Game extends Scene {
 
@@ -66,8 +66,10 @@ public class _Game extends Scene {
 			conveyor.getWorld().tick();
 		}
 
-		if (showGUI) {
-			guiHandler.tick();
+		if (showGUI && !guiHandler.getEnabled()) {
+			guiHandler.enableGUIHandler();
+		} else if (!showGUI && guiHandler.getEnabled()) {
+			guiHandler.disableGUIHandler();
 		}
 
 		if (paused) {
@@ -99,7 +101,7 @@ public class _Game extends Scene {
 	}
 
 	public void setPaused(boolean paused) {
-		paused = paused;
+		this.paused = paused;
 	}
 
 }

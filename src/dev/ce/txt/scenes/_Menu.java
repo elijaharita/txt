@@ -6,7 +6,6 @@ import dev.ce.txt.Conveyor;
 import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIButton;
-import dev.ce.txt.gfx.gui.GUITextField;
 import dev.ce.txt.gfx.gui.GameString;
 
 public class _Menu extends Scene {
