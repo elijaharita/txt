@@ -12,12 +12,6 @@ public class GUIButton extends GUIObject {
 	private GameString gameString1, gameString2;
 	private boolean toggled, toggleable;
 
-	public GUIButton(int x, int y, int width, int height, BufferedImage[] images, ClickListener clickListener) {
-		super(x, y, width, height);
-		this.images = images;
-		this.clickListener = clickListener;
-	}
-
 	public GUIButton(int x, int y, int width, int height, BufferedImage[] images, String title,
 			ClickListener clickListener) {
 		super(x, y, width, height);

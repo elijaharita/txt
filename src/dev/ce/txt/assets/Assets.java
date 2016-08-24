@@ -12,7 +12,7 @@ public class Assets {
 	
 	public static final String CHARACTERSTRING = " abcdefghijklmnopqrstuvwxyz0123456789.,:;'\"!?$%()-=+/";;
 	
-	public static BufferedImage cobblestone, grass, dirt, stone, ungenerated, entity;
+	public static BufferedImage cobblestone, grass, dirt, stone, ungenerated, entity, log;
 	public static BufferedImage guiButton[];
 	public static BufferedImage character[];
 	public static BufferedImage textArea;
@@ -47,6 +47,7 @@ public class Assets {
 		dirt = spriteSheet.getImage(3, 0);
 		stone = spriteSheet.getImage(4, 0);
 		entity = spriteSheet.getImage(5, 0);
+		log = spriteSheet.getImage(6, 0);
 		
 		guiButton[0] = gui.getImage(0, 0, 8, 1);
 		guiButton[1] = gui.getImage(0, 1, 8, 1);
@@ -63,11 +64,15 @@ public class Assets {
 	public static BufferedImage getCharacter(char character) {
 		
 		int charAt = 0;
-		char currentChar;
+		char currentChar = 0;
 		
 		for(int y = 0; y < characters.getWidth(); y++) {
 			for(int x = 0; x < characters.getHeight(); x++) {
-				currentChar = CHARACTERSTRING.charAt(charAt);
+				try {
+					currentChar = CHARACTERSTRING.charAt(charAt);
+				} catch(StringIndexOutOfBoundsException e) {
+					System.err.println("String out of bounds exception: " + charAt);
+				}
 				if(Character.toLowerCase(character) == currentChar) {
 					return characters.getImage(x, y);
 				}

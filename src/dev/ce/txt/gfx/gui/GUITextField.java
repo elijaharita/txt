@@ -19,8 +19,8 @@ public class GUITextField extends GUIObject implements KeyListener {
 
 	public GUITextField(int x, int y, Conveyor conveyor) {
 		super(x, y, Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE);
-		text = "";
-		renderText = new GameString("", 32, 100, 100);
+		renderText = new GameString("", 32, x, y);
+		text = renderText.getText();
 		this.x = x;
 		this.y = y;
 		conveyor.getGame().getFrame().addKeyListener(this);
@@ -30,7 +30,7 @@ public class GUITextField extends GUIObject implements KeyListener {
 	public void tick() {
 
 		renderText.tick();
-		
+
 	}
 
 	@Override
@@ -43,15 +43,16 @@ public class GUITextField extends GUIObject implements KeyListener {
 
 	@Override
 	public void onClick() {
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if (focused) {
-			addChar(e.getKeyChar());
+			if (Assets.CHARACTERSTRING.contains(Character.toString(e.getKeyChar()))) {
+				addChar(e.getKeyChar());
+			}
 		}
-		System.out.println(focused);
 	}
 
 	@Override
@@ -61,13 +62,21 @@ public class GUITextField extends GUIObject implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		if(e.getKeyCode() == 8 || e.getKeyCode() == 127) {
+			removeChar();
+		}
 	}
 
 	public void addChar(char charTyped) {
 		text += charTyped;
 		renderText.setText(text);
-		System.out.println(text);
+	}
+	
+	public void removeChar() {
+		StringBuilder sb = new StringBuilder(text);
+		sb.deleteCharAt(text.length() - 1);
+		text = sb.toString();
+		renderText.setText(text);
 	}
 
 	public String getText() {

@@ -51,4 +51,12 @@ public class Conveyor {
 		return game.getMenuScene();
 	}
 	
+	public String getGameName(){
+		return Game.getGameName();
+	}
+
+	public String getGameVersion() {
+		return Game.getGameVersion();
+	}
+	
 }

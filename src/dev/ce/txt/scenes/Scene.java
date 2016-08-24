@@ -18,7 +18,6 @@ public abstract class Scene {
 	public Scene(Conveyor conveyor) {
 		this.conveyor = conveyor;
 		guiHandler = new GUIHandler(conveyor);
-
 	}
 
 	public static Scene getScene() {

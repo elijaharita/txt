@@ -3,6 +3,7 @@ package dev.ce.txt.gfx.gui;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dev.ce.txt.Game;
 import dev.ce.txt.assets.Assets;
 
 public class GameString extends GUIObject {
@@ -26,8 +27,9 @@ public class GameString extends GUIObject {
 	}
 
 	public void setText(String text) {
+		this.text = text;
 		letters = new char[text.length()];
-		character = new BufferedImage[text.length()];
+		character = new BufferedImage[letters.length];
 		
 		for (int i = 0; i < text.length(); i++) {
 			letters[i] = text.charAt(i);
@@ -48,6 +50,10 @@ public class GameString extends GUIObject {
 			
 		}
 
+	}
+	
+	public void centerX() {
+		x = Game.width / 2 - text.length() * fontSize / 2;
 	}
 
 	@Override

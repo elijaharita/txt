@@ -17,13 +17,14 @@ import dev.ce.txt.input.MouseHandler;
 import dev.ce.txt.scenes.Scene;
 import dev.ce.txt.scenes._Game;
 import dev.ce.txt.scenes._Menu;
-import dev.ce.txt.scenes._Options;
 import dev.ce.txt.scenes._PlayMenu;
+import dev.ce.txt.scenes.subscenes._Options;
 import dev.ce.txt.world.World;
 
 public class Game implements Runnable {
 
-	public static final String NAME = "txt";
+	public static final String NAME = "GAMENAME";
+	public static final String VERSION = "PRE-ALPHA 0.01";
 
 	public _Game gameScene;
 	public _Menu menuScene;
@@ -31,8 +32,8 @@ public class Game implements Runnable {
 	public _PlayMenu playMenuScene;
 
 	public int scale = 1;
-	public int width = 1366;
-	public int height = 768;
+	public static int width = 1366;
+	public static int height = 768;
 
 	public JFrame frame;
 	public Canvas canvas;
@@ -43,6 +44,8 @@ public class Game implements Runnable {
 	public int tickCount = 0;
 	public Conveyor conveyor;
 	public KeyHandler keyHandler;
+
+
 	public MouseHandler mouseHandler;
 
 	private Thread thread;
@@ -249,6 +252,14 @@ public class Game implements Runnable {
 
 	public _PlayMenu getPlayMenuScene() {
 		return playMenuScene;
+	}
+
+	public static String getGameName() {
+		return NAME;
+	}
+	
+	public static String getGameVersion() {
+		return VERSION;
 	}
 
 }

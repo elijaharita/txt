@@ -7,10 +7,13 @@ import dev.ce.txt.assets.Assets;
 import dev.ce.txt.gfx.gui.ClickListener;
 import dev.ce.txt.gfx.gui.GUIButton;
 import dev.ce.txt.gfx.gui.GameString;
+import dev.ce.txt.scenes.subscenes._Options;
 
 public class _Menu extends Scene {
 
 	private _Options optionsScene;
+	private GameString title = new GameString(conveyor.getGameName(), 75, 0, 10);
+	private GameString version = new GameString(conveyor.getGameVersion(), 15, 0, 85);
 	
 	public _Menu(Conveyor conveyor) {
 		super(conveyor);
@@ -30,9 +33,10 @@ public class _Menu extends Scene {
 		 * }));
 		 * 
 		 */
-
-		guiHandler.add(new GameString("txt", 75, conveyor.getGameWidth() / 2 - 115, 10));
-		guiHandler.add(new GameString("v0.12", 20, conveyor.getGameWidth() / 2 - 50, 85));
+		title.centerX();
+		version.centerX();
+		guiHandler.add(title);
+		guiHandler.add(version);
 
 		guiHandler.add(new GUIButton(conveyor.getGameWidth() / 2 - Assets.DEFAULTRENDEREDSIZE * 4, 200,
 				Assets.DEFAULTRENDEREDSIZE * 8, Assets.DEFAULTRENDEREDSIZE, Assets.guiButton, "Play",
@@ -40,7 +44,7 @@ public class _Menu extends Scene {
 
 					@Override
 					public void onClick() {
-						Scene.setScene(conveyor.getGame().getPlayMenuScene());
+						Scene.setSubScene(conveyor.getGame().getPlayMenuScene());
 					}
 
 				}));

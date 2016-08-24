@@ -63,6 +63,12 @@ public class GUIHandler {
 	public void remove(GUIObject object) {
 		objects.remove(object);
 	}
+	
+	public void removeAll() {
+		for(GUIObject object : objects) {
+			objects.remove(object);
+		}
+	}
 
 	public void disableGUIHandler() {
 		enabled = false;
