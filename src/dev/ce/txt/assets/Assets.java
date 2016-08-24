@@ -12,7 +12,7 @@ public class Assets {
 	
 	public static final String CHARACTERSTRING = " abcdefghijklmnopqrstuvwxyz0123456789.,:;'\"!?$%()-=+/";;
 	
-	public static BufferedImage cobblestone, grass, dirt, stone, ungenerated, entity, log;
+	public static BufferedImage cobblestone, grass, dirt, stone, ungenerated, entity, log, plank, sand, water, leaves;
 	public static BufferedImage guiButton[];
 	public static BufferedImage character[];
 	public static BufferedImage textArea;
@@ -48,6 +48,10 @@ public class Assets {
 		stone = spriteSheet.getImage(4, 0);
 		entity = spriteSheet.getImage(5, 0);
 		log = spriteSheet.getImage(6, 0);
+		plank = spriteSheet.getImage(7, 0);
+		sand = spriteSheet.getImage(0, 1);
+		water = spriteSheet.getImage(1, 1);
+		leaves = spriteSheet.getImage(2, 1);
 		
 		guiButton[0] = gui.getImage(0, 0, 8, 1);
 		guiButton[1] = gui.getImage(0, 1, 8, 1);

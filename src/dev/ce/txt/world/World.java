@@ -112,12 +112,12 @@ public class World {
 
 		String path = "resources/worlds/" + name + ".lvl";
 		
+		Random rand = new Random();
+		
 		Util.writeFile(path, Integer.toString(width) + "\t");
 		Util.writeFile(path, Integer.toString(height) + "\n");
-		Util.writeFile(path, Integer.toString(spawnX) + "\t");
-		Util.writeFile(path, Integer.toString(spawnY) + "\n");
-		
-		Random rand = new Random();
+		Util.writeFile(path, Integer.toString(rand.nextInt(width)) + "\t");
+		Util.writeFile(path, Integer.toString(rand.nextInt(height)) + "\n");
 		
 		for (int x = 0; x < width; x++) {
 
@@ -125,7 +125,7 @@ public class World {
 			
 			for (int y = 0; y < height; y++) {
 
-				clump = clump + rand.nextInt(5) + "\t";
+				clump = clump + (rand.nextInt(8) + 1) + "\t";
 				
 			}
 			

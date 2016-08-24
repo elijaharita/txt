@@ -51,6 +51,7 @@ public class _Game extends Scene {
 					@Override
 					public void onClick() {
 						Scene.setScene(conveyor.getGame().getMenuScene());
+						setPaused(false);
 					}
 
 				}));
