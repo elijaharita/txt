@@ -105,6 +105,7 @@ public class _PlayMenu extends SubScene {
 		}
 		
 		public void initializeWorlds(String path) {
+			worldsLoaded = 0;
 			guiHandler.removeAll();
 			dir = new File(path);
 			files = dir.list();
